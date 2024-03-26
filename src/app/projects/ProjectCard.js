@@ -3,6 +3,7 @@ import { Box, Card } from "@mui/material";
 
 export const ProjectCard = async ({ url }) => {
   const project = await getRepoData(url);
+  console.log(project)
 
   return (
     <a href={url} target="_blank">
