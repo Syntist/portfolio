@@ -36,7 +36,20 @@ function Header() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar
+      position="static"
+      sx={{
+        backgroundColor: "rgba(255, 255, 255, 0.2)",
+        position: "absolute",
+        left: "0",
+        top: "0",
+        width: "100%",
+        zIndex: "9",
+        boxShadow: "none",
+        border: "0",
+        color: "#000"
+      }}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -88,7 +101,13 @@ function Header() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem
+                  key={page}
+                  onClick={handleCloseNavMenu}
+                  sx={{
+                    color: "#000"
+                  }}
+                >
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
@@ -113,12 +132,25 @@ function Header() {
           >
             LOGO
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{
+            flexGrow: "1",
+            display: { xs: 'none', md: 'flex' },
+            gap: "10px"
+          }}>
             {pages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{
+                  display: "block",
+                  color: "#000",
+                  fontWeight: "600",
+
+                  "&:hover, &.active": {
+                    color: "#fff",
+                    backgroundColor: "#000"
+                  }
+                }}
               >
                 {page}
               </Button>
