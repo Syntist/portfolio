@@ -78,7 +78,7 @@ function IntroSection() {
         }}
       >
         <Image
-          src={'/img01.jpg'}
+          src={'/background.webp'}
           width={1920}
           height={500}
           alt=""
