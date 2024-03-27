@@ -152,7 +152,7 @@ export const ProjectCard = async ({ id, url }) => {
           </Box>
         </Card>
       </Link>
-      <DeleteProject id={id} />
+      {id && <DeleteProject id={id} />}
     </>
   );
 };
