@@ -77,12 +77,12 @@ function IntroSection() {
           }
         }}
       >
-        {/* <Image
-          src="/img01.jpg"
+        <Image
+          src={'/img01.jpg'}
           width={1920}
           height={500}
           alt=""
-        /> */}
+        />
       </Box>
     </Box>
   );

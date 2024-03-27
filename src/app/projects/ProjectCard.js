@@ -13,6 +13,7 @@ export const ProjectCard = async ({ url }) => {
       target="_blank"
       sx={{
         display: "flex",
+        fontFamily: "roboto",
         width: "100%",
         textDecoration: "none",
         transition: "transform 0.3s ease",

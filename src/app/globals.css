@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 body,
 *,
 *::after,
@@ -15,7 +16,7 @@ h3, .h3,
 h4, .h4,
 h5, .h5,
 h6, .h6{
-  font-family: "Oswald", "Roboto", Arial, Helvetica, sans-serif !important;
+  font-family: var(--font-oswald), var(--font-roboto), Arial, Helvetica, sans-serif !important;
   font-weight: 600;
 }
 

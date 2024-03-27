@@ -51,6 +51,7 @@ export default async function ProjectsSection() {
         <Grid container spacing={2}>
           {projects.map((project) => (
             <Grid
+              key={project._id}
               item
               xs={6}
               md={4}
