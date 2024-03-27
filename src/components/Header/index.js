@@ -74,7 +74,7 @@ function Header() {
               textDecoration: "none",
             }}
           >
-            LOGO
+            Talha
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -138,7 +138,7 @@ function Header() {
               textDecoration: "none",
             }}
           >
-            LOGO
+            Talha
           </Typography>
           <Box
             sx={{
