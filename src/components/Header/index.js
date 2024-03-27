@@ -22,6 +22,7 @@ const pages = [
 
 function Header() {
   const pathname = usePathname();
+  console.log(pathname);
   const [anchorElNav, setAnchorElNav] = React.useState();
   const [anchorElUser, setAnchorElUser] = React.useState();
 
@@ -105,7 +106,7 @@ function Header() {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map(({label, path}) => (
+              {pages.map(({ label, path }) => (
                 <MenuItem
                   key={label}
                   onClick={handleCloseNavMenu}
@@ -113,7 +114,9 @@ function Header() {
                     color: "#000",
                   }}
                 >
-                  <Typography textAlign="center">{label}</Typography>
+                  <Link href={path}>
+                    <Typography textAlign="center">{label}</Typography>
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>
@@ -144,22 +147,28 @@ function Header() {
               gap: "10px",
             }}
           >
-            {pages.map(({label, path}) => (
-              <Link
-                key={path}
-                href={path}
-                sx={{
-                  display: "block",
-                  color: "#000",
-                  fontWeight: "600",
+            {pages.map(({ label, path }) => (
+              <Link key={path} href={path}>
+                <Button
+                  className={pathname === path && "active"}
+                  sx={{
+                    display: "block",
+                    color: "#000",
+                    fontWeight: "600",
 
-                  "&:hover, &.active": {
-                    color: "#fff",
-                    backgroundColor: "#000",
-                  },
-                }}
-              >
-                {label}
+                    "&.active": {
+                      color: "#fff",
+                      backgroundColor: "#000",
+                    },
+
+                    "&:hover": {
+                      color: "#fff",
+                      backgroundColor: "#212121",
+                    },
+                  }}
+                >
+                  {label}
+                </Button>
               </Link>
             ))}
           </Box>
