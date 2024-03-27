@@ -8,15 +8,14 @@ export default async function Projects() {
   const projects = await getProjects();
 
   return (
-    <>
+    <Box mt={10}>
       {projects.map((project) => (
         <Box key={project._id}>
-          <ProjectCard url={project?.github} />
+          <ProjectCard id={project._id.toString()} url={project?.github} />
           <h1>{project?.github}</h1>
         </Box>
       ))}
-
       <ProjectForm />
-    </>
+    </Box>
   );
 }

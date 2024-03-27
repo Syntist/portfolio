@@ -22,7 +22,6 @@ const pages = [
 
 function Header() {
   const pathname = usePathname();
-  console.log(pathname);
   const [anchorElNav, setAnchorElNav] = React.useState();
   const [anchorElUser, setAnchorElUser] = React.useState();
 
@@ -150,7 +149,7 @@ function Header() {
             {pages.map(({ label, path }) => (
               <Link key={path} href={path}>
                 <Button
-                  className={pathname === path && "active"}
+                  className={pathname === path && "active" || ''}
                   sx={{
                     display: "block",
                     color: "#000",

@@ -10,9 +10,10 @@ import { toast } from "react-toastify";
 export const ProjectForm = () => {
   const [state, formAction] = useFormState(createProject, {});
 
-	useEffect(() => {
-		if(state?.errmsg) toast.error(state?.errmsg)
-	}, [state])
+  useEffect(() => {
+    if (state?.acknowledged) toast.success("Project Added");
+    else if (state?.errmsg) toast.error(state?.errmsg);
+  }, [state]);
 
   return (
     <Box>
