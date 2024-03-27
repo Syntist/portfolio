@@ -18,6 +18,8 @@ export const createProject = async (prevState, formData) => {
 
     if (project) {
       revalidatePath("/");
+      revalidatePath("/projects");
+
       return project;
     }errorResponse
   } catch (e) {
