@@ -1,8 +1,8 @@
+import { EducationSection } from "@/components/EducationSection";
 import IntroSection from "@/components/IntroSection";
 import { Proficiency } from "@/components/Proficiency";
 import ProjectsSection from "@/components/ProjectsSection";
 import { WhatIDoSection } from "@/components/WhatIDoSection";
-import { Typography } from "@mui/material";
 
 export default async function Home() {
   return (
@@ -11,6 +11,7 @@ export default async function Home() {
       <ProjectsSection />
       <WhatIDoSection />
       <Proficiency />
+      <EducationSection />
     </main>
   );
 }

@@ -1,6 +1,5 @@
 import { Typography, Box, Container, Grid, List, ListItem } from "@mui/material";
 import Image from 'next/image'
-import HtmlIcon from '@mui/icons-material/Html';
 
 export const WhatIDoSection = (props) => {
   return (
