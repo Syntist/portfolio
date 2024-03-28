@@ -33,7 +33,10 @@ function IntroSection() {
               maxWidth: "800px",
               marginLeft: "auto",
               marginRight: "auto",
-              textAlign: "center"
+              textAlign: "center",
+              backgroundColor: "rgba(31, 31, 31,0.7)",
+              padding: "24px",
+              borderRadius: "10px"
             }}
           >
             <Typography

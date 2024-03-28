@@ -44,7 +44,7 @@ function Header() {
     <AppBar
       position="static"
       sx={{
-        backgroundColor: "rgba(255, 255, 255, 0.2)",
+        backgroundColor: "rgba(31, 31, 31, 0.7)",
         position: "absolute",
         left: "0",
         top: "0",
@@ -52,7 +52,7 @@ function Header() {
         zIndex: "9",
         boxShadow: "none",
         border: "0",
-        color: "#000",
+        color: "#fff",
       }}
     >
       <Container maxWidth="xl">
@@ -152,17 +152,12 @@ function Header() {
                   className={pathname === path && "active" || ''}
                   sx={{
                     display: "block",
-                    color: "#000",
+                    color: "#fff",
                     fontWeight: "600",
 
-                    "&.active": {
-                      color: "#fff",
-                      backgroundColor: "#000",
-                    },
-
-                    "&:hover": {
-                      color: "#fff",
-                      backgroundColor: "#212121",
+                    "&:hover, &.active": {
+                      color: "#000",
+                      backgroundColor: "#fff",
                     },
                   }}
                 >

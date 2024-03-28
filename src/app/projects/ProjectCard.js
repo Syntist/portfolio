@@ -34,7 +34,8 @@ export const ProjectCard = async ({ id, url }) => {
             display: "flex",
             width: "100%",
             flexDirection: "column",
-            border: "1px solid #ddd",
+            border: "1px solid #373737",
+            backgroundColor: "#2b2b2b"
           }}
         >
           <Box
@@ -49,6 +50,7 @@ export const ProjectCard = async ({ id, url }) => {
                 lineHeight: "1.5",
                 marginBottom: "16px",
                 wordBreak: "break-word",
+                color: "#fff"
               }}
             >
               {project?.data?.name}
@@ -59,7 +61,7 @@ export const ProjectCard = async ({ id, url }) => {
                 sx={{
                   fontSize: "16px",
                   lineHeight: "1.2",
-                  color: "#586069",
+                  color: "#e9e9e9",
                 }}
               >
                 {project?.data?.description}
@@ -80,7 +82,7 @@ export const ProjectCard = async ({ id, url }) => {
                 fontSize: "14px",
                 lineHeight: "1.2",
                 wordBreak: "break-word",
-                color: "#6a737d",
+                color: "#C0C0C0",
                 display: "flex",
                 gap: "3px",
                 alignItems: "center",
@@ -103,7 +105,7 @@ export const ProjectCard = async ({ id, url }) => {
                 fontSize: "14px",
                 lineHeight: "1.2",
                 wordBreak: "break-word",
-                color: "#6a737d",
+                color: "#C0C0C0",
                 display: "flex",
                 gap: "3px",
                 alignItems: "center",
@@ -123,7 +125,7 @@ export const ProjectCard = async ({ id, url }) => {
                 fontSize: "14px",
                 lineHeight: "1.2",
                 wordBreak: "break-word",
-                color: "#6a737d",
+                color: "#C0C0C0",
                 display: "flex",
                 gap: "3px",
                 alignItems: "center",
@@ -143,7 +145,7 @@ export const ProjectCard = async ({ id, url }) => {
                 fontSize: "14px",
                 lineHeight: "1.2",
                 wordBreak: "break-word",
-                color: "#6a737d",
+                color: "#C0C0C0",
                 marginLeft: "auto",
               }}
             >
