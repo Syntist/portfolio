@@ -14,468 +14,198 @@ export const EducationSection = (props) => {
       <Container maxWidth="xl">
         <Box
           sx={{
-            border: "1px solid #373737",
-            backgroundColor: "#2b2b2b",
-            padding: "24px",
-            borderRadius: "8px"
+            marginBottom: "45px"
           }}
         >
-          <Grid container spacing={3}>
-            <Grid
-              item
-              xs={6}
-            >
-              <Box
-                sx={{
-                  border: "1px solid #373737",
-                  backgroundColor: "#1f1f1f",
-                  padding: "24px",
-                  borderRadius: "4px",
-                  width: "100%"
-                }}
-              >
-                <Box
-                  sx={{
-                    marginBottom: "45px"
-                  }}
-                >
-                  <Typography
-                    variant="h2"
-                    sx={{
-                      fontSize: "40px",
-                      lineHeight: "1.5",
-                      display: "flex",
-                      width: "100%",
-                      alignItems: "flex-end",
-                      gap: "24px",
-                      fontWeight: "400",
+          <Typography
+            variant="h2"
+            sx={{
+              fontSize: "40px",
+              lineHeight: "1.5",
+              display: "flex",
+              width: "100%",
+              alignItems: "flex-end",
+              gap: "24px",
+              fontWeight: "400",
 
-                      "&:after": {
-                        content: "''",
-                        flexGrow: "1",
-                        display: "block",
-                        height: "1px",
-                        backgroundColor: "currentcolor",
-                        opacity: "0.1",
-                        position: "relative",
-                        top: "-9px"
-                      }
-                    }}
-                  >
-                    Education
-                  </Typography>
-                </Box>
-                <List
-                  sx={{
-                    
-                    "> li + li": {
-                      marginTop: "24px"
-                    }
-                  }}
-                >
-                  <ListItem
-                    sx={{
-                      padding: "0 0 0 24px",
-                      position: "relative",
-                      gap: "14px",
-                      alignItems: "flex-start",
+              "&:after": {
+                content: "''",
+                flexGrow: "1",
+                display: "block",
+                height: "1px",
+                backgroundColor: "currentcolor",
+                opacity: "0.1",
+                position: "relative",
+                top: "-9px"
+              }
+            }}
+          >
+            Education
+          </Typography>
+        </Box>
+        <List
+          sx={{
 
-                      "&:before": {
-                        content: "''",
-                        borderRadius: "100%",
-                        width: "8px",
-                        height: "8px",
-                        position: "absolute",
-                        left: "0",
-                        top: "5px",
-                        backgroundColor: "#E3C050"
-                      }
-                    }}
-                  >
-                    <Box
-                      sx={{
-                        width: "80px",
-                        height: "80px",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        flexShrink: "0",
-                        border: "1px solid #373737",
-                        backgroundColor: "#454648",
-                        borderRadius: "4px",
-                        
-                        "img": {
-                          maxWidth: "100%",
-                          height: "auto"
-                        }
-                      }}
-                    >
-                      <Box>
-                        <Image
-                          src={'/icons8-logo-96.png'}
-                          width={64}
-                          height={64}
-                          alt=""
-                        />
-                      </Box>
-                    </Box>
-                    <Box
-                      sx={{
-                        flexGrow: "1"
-                      }}
-                    >
-                      <Typography
-                        variant="caption"
-                        sx={{
-                          fontSize: "14px",
-                          lineHeight: "1.2",
-                          display: "block",
-                          color: "#c0c0c0"
-                        }}
-                      >
-                        2020 - 2024
-                      </Typography>
-                      <Typography
-                        variant="h3"
-                        sx={{
-                          fontSize: "26px",
-                          lineHeight: "1.5",
-                          color: "#fff",
-                          marginBottom: "4px"
-                        }}
-                      >
-                        Web Designer &amp; Developer
-                      </Typography>
-                      <Typography
-                        variant="body1"
-                        sx={{
-                          fontSize: "16px",
-                          lineHeight: "1.3",
-                          color: "#c0c0c0"
-                        }}
-                      >
-                        Ranked top 10% in the program.
-                      </Typography>
-                    </Box>
-                  </ListItem>
-                  <ListItem
-                    sx={{
-                      padding: "0 0 0 24px",
-                      position: "relative",
-                      gap: "14px",
-                      alignItems: "flex-start",
-
-                      "&:before": {
-                        content: "''",
-                        borderRadius: "100%",
-                        width: "8px",
-                        height: "8px",
-                        position: "absolute",
-                        left: "0",
-                        top: "5px",
-                        backgroundColor: "#373737"
-                      }
-                    }}
-                  >
-                    <Box
-                      sx={{
-                        width: "80px",
-                        height: "80px",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        flexShrink: "0",
-                        border: "1px solid #373737",
-                        backgroundColor: "#454648",
-                        borderRadius: "4px",
-                        
-                        "img": {
-                          maxWidth: "100%",
-                          height: "auto"
-                        }
-                      }}
-                    >
-                      <Box>
-                        <Image
-                          src={'/icons8-logo-96.png'}
-                          width={64}
-                          height={64}
-                          alt=""
-                        />
-                      </Box>
-                    </Box>
-                    <Box
-                      sx={{
-                        flexGrow: "1"
-                      }}
-                    >
-                      <Typography
-                        variant="caption"
-                        sx={{
-                          fontSize: "14px",
-                          lineHeight: "1.2",
-                          display: "block",
-                          color: "#c0c0c0"
-                        }}
-                      >
-                        2017 - 2020
-                      </Typography>
-                      <Typography
-                        variant="h3"
-                        sx={{
-                          fontSize: "26px",
-                          lineHeight: "1.5",
-                          color: "#fff",
-                          marginBottom: "4px"
-                        }}
-                      >
-                        Master of Science in Computer Science
-                      </Typography>
-                      <Typography
-                        variant="body1"
-                        sx={{
-                          fontSize: "16px",
-                          lineHeight: "1.3",
-                          color: "#c0c0c0"
-                        }}
-                      >
-                        Participated in the research of published 3 papers.
-                      </Typography>
-                    </Box>
-                  </ListItem>
-                </List>
-              </Box>
-            </Grid>
-            <Grid
-              item
-              xs={6}
+            "> li + li": {
+              marginTop: "24px",
+              borderTop: "1px solid #373737",
+              paddingTop: "24px"
+            }
+          }}
+        >
+          <ListItem
+            sx={{
+              padding: "0",
+              gap: "24px",
+              alignItems: "flex-start"
+            }}
+          >
+            <Box
               sx={{
-                display: "flex"
+                width: "80px",
+                flexShrink: "0",
+
+                "img": {
+                  maxWidth: "100%",
+                  height: "auto"
+                }
               }}
             >
-              <Box
+              <Image
+                src={'/harvardLogo.542dab89bfb35b7f5c0d.png'}
+                width={500}
+                height={500}
+                alt=""
+              />
+            </Box>
+            <Box
+              sx={{
+                flexGrow: "1"
+              }}
+            >
+              <Typography
+                variant="h2"
                 sx={{
-                  border: "1px solid #373737",
-                  backgroundColor: "#1f1f1f",
-                  padding: "24px",
-                  borderRadius: "4px",
-                  width: "100%"
+                  fontSize: "26px",
+                  lineHeight: "1.5",
+                  fontWeight: "400",
+                  color: "#fff"
                 }}
               >
-                <Box
-                  sx={{
-                    marginBottom: "45px"
-                  }}
-                >
-                  <Typography
-                    variant="h2"
-                    sx={{
-                      fontSize: "40px",
-                      lineHeight: "1.5",
-                      display: "flex",
-                      width: "100%",
-                      alignItems: "flex-end",
-                      gap: "24px",
-                      fontWeight: "400",
+                Harvard University
+              </Typography>
+              <Typography
+                variant="h3"
+                sx={{
+                  fontSize: "22px",
+                  lineHeight: "1.5",
+                  marginBottom: "8px",
+                  fontWeight: "300",
+                  color: "#e9e9e9"
+                }}
+              >
+                Master of Science in Computer Science
+              </Typography>
+              <Typography
+                variant="caption"
+                sx={{
+                  fontSize: "14px",
+                  lineHeight: "1.2",
+                  marginBottom: "8px",
+                  color: "#c0c0c0",
+                  display: "block"
+                }}
+              >
+                September 2017 - April 2019
+              </Typography>
+              <Typography
+                variant="body1"
+                sx={{
+                  fontSize: "16px",
+                  lineHeight: "1.5"
+                }}
+              >
+                Participated in the research of XXX and published 3 papers.
+              </Typography>
+            </Box>
+          </ListItem>
+          <ListItem
+            sx={{
+              padding: "0",
+              gap: "24px",
+              alignItems: "flex-start"
+            }}
+          >
+            <Box
+              sx={{
+                width: "80px",
+                flexShrink: "0",
 
-                      "&:after": {
-                        content: "''",
-                        flexGrow: "1",
-                        display: "block",
-                        height: "1px",
-                        backgroundColor: "currentcolor",
-                        opacity: "0.1",
-                        position: "relative",
-                        top: "-9px"
-                      }
-                    }}
-                  >
-                    Experience
-                  </Typography>
-                </Box>
-                <List
-                  sx={{
-                    
-                    "> li + li": {
-                      marginTop: "24px"
-                    }
-                  }}
-                >
-                  <ListItem
-                    sx={{
-                      padding: "0 0 0 24px",
-                      position: "relative",
-                      gap: "14px",
-                      alignItems: "flex-start",
-
-                      "&:before": {
-                        content: "''",
-                        borderRadius: "100%",
-                        width: "8px",
-                        height: "8px",
-                        position: "absolute",
-                        left: "0",
-                        top: "5px",
-                        backgroundColor: "#E3C050"
-                      }
-                    }}
-                  >
-                    <Box
-                      sx={{
-                        width: "80px",
-                        height: "80px",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        flexShrink: "0",
-                        border: "1px solid #373737",
-                        backgroundColor: "#454648",
-                        borderRadius: "4px",
-                        
-                        "img": {
-                          maxWidth: "100%",
-                          height: "auto"
-                        }
-                      }}
-                    >
-                      <Box>
-                        <Image
-                          src={'/icons8-logo-96.png'}
-                          width={64}
-                          height={64}
-                          alt=""
-                        />
-                      </Box>
-                    </Box>
-                    <Box
-                      sx={{
-                        flexGrow: "1"
-                      }}
-                    >
-                      <Typography
-                        variant="caption"
-                        sx={{
-                          fontSize: "14px",
-                          lineHeight: "1.2",
-                          display: "block",
-                          color: "#c0c0c0"
-                        }}
-                      >
-                        2020 - 2024
-                      </Typography>
-                      <Typography
-                        variant="h3"
-                        sx={{
-                          fontSize: "26px",
-                          lineHeight: "1.5",
-                          color: "#fff",
-                          marginBottom: "4px"
-                        }}
-                      >
-                        Web Designer &amp; Developer
-                      </Typography>
-                      <Typography
-                        variant="body1"
-                        sx={{
-                          fontSize: "16px",
-                          lineHeight: "1.3",
-                          color: "#c0c0c0"
-                        }}
-                      >
-                        Ranked top 10% in the program.
-                      </Typography>
-                    </Box>
-                  </ListItem>
-                  <ListItem
-                    sx={{
-                      padding: "0 0 0 24px",
-                      position: "relative",
-                      gap: "14px",
-                      alignItems: "flex-start",
-
-                      "&:before": {
-                        content: "''",
-                        borderRadius: "100%",
-                        width: "8px",
-                        height: "8px",
-                        position: "absolute",
-                        left: "0",
-                        top: "5px",
-                        backgroundColor: "#373737"
-                      }
-                    }}
-                  >
-                    <Box
-                      sx={{
-                        width: "80px",
-                        height: "80px",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        flexShrink: "0",
-                        border: "1px solid #373737",
-                        backgroundColor: "#454648",
-                        borderRadius: "4px",
-                        
-                        "img": {
-                          maxWidth: "100%",
-                          height: "auto"
-                        }
-                      }}
-                    >
-                      <Box>
-                        <Image
-                          src={'/icons8-logo-96.png'}
-                          width={64}
-                          height={64}
-                          alt=""
-                        />
-                      </Box>
-                    </Box>
-                    <Box
-                      sx={{
-                        flexGrow: "1"
-                      }}
-                    >
-                      <Typography
-                        variant="caption"
-                        sx={{
-                          fontSize: "14px",
-                          lineHeight: "1.2",
-                          display: "block",
-                          color: "#c0c0c0"
-                        }}
-                      >
-                        2017 - 2020
-                      </Typography>
-                      <Typography
-                        variant="h3"
-                        sx={{
-                          fontSize: "26px",
-                          lineHeight: "1.5",
-                          color: "#fff",
-                          marginBottom: "4px"
-                        }}
-                      >
-                        Master of Science in Computer Science
-                      </Typography>
-                      <Typography
-                        variant="body1"
-                        sx={{
-                          fontSize: "16px",
-                          lineHeight: "1.3",
-                          color: "#c0c0c0"
-                        }}
-                      >
-                        Participated in the research of published 3 papers.
-                      </Typography>
-                    </Box>
-                  </ListItem>
-                </List>
-              </Box>
-            </Grid>
-          </Grid>
-        </Box>
+                "img": {
+                  maxWidth: "100%",
+                  height: "auto"
+                }
+              }}
+            >
+              <Image
+                src={'/harvardLogo.542dab89bfb35b7f5c0d.png'}
+                width={500}
+                height={500}
+                alt=""
+              />
+            </Box>
+            <Box
+              sx={{
+                flexGrow: "1"
+              }}
+            >
+              <Typography
+                variant="h2"
+                sx={{
+                  fontSize: "26px",
+                  lineHeight: "1.5",
+                  fontWeight: "400",
+                  color: "#fff"
+                }}
+              >
+                Stanford University
+              </Typography>
+              <Typography
+                variant="h3"
+                sx={{
+                  fontSize: "22px",
+                  lineHeight: "1.5",
+                  marginBottom: "8px",
+                  fontWeight: "300",
+                  color: "#e9e9e9"
+                }}
+              >
+                Bachelor of Science in Computer Science
+              </Typography>
+              <Typography
+                variant="caption"
+                sx={{
+                  fontSize: "14px",
+                  lineHeight: "1.2",
+                  marginBottom: "8px",
+                  color: "#c0c0c0",
+                  display: "block"
+                }}
+              >
+                September 2013 - April 2017
+              </Typography>
+              <Typography
+                variant="body1"
+                sx={{
+                  fontSize: "16px",
+                  lineHeight: "1.5"
+                }}
+              >
+                Ranked top 10% in the program. Took courses about Software Engineering, Web Security, Operating Systems, &hellip;
+              </Typography>
+            </Box>
+          </ListItem>
+        </List>
       </Container>
     </Box>
   );

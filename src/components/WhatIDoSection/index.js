@@ -33,6 +33,7 @@ export const WhatIDoSection = (props) => {
                 src={'/img02.gif'}
                 width={500}
                 height={500}
+                unoptimized
                 alt=""
               />
             </Box>
