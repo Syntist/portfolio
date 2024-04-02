@@ -1,3 +1,4 @@
+import { ContactSection } from "@/components/ContactSection";
 import { EducationSection } from "@/components/EducationSection";
 import { ExperienceSection } from "@/components/ExperienceSection";
 import IntroSection from "@/components/IntroSection";
@@ -14,6 +15,7 @@ export default async function Home() {
       <Proficiency />
       <EducationSection />
       <ExperienceSection />
+      <ContactSection />
     </main>
   );
 }

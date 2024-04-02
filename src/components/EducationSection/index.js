@@ -62,8 +62,12 @@ export const EducationSection = (props) => {
           >
             <Box
               sx={{
-                width: "80px",
+                width: "50px",
                 flexShrink: "0",
+
+                "@media (min-width: 768px)": {
+                  width: "80px"
+                },
 
                 "img": {
                   maxWidth: "100%",
@@ -138,8 +142,12 @@ export const EducationSection = (props) => {
           >
             <Box
               sx={{
-                width: "80px",
+                width: "50px",
                 flexShrink: "0",
+
+                "@media (min-width: 768px)": {
+                  width: "80px"
+                },
 
                 "img": {
                   maxWidth: "100%",

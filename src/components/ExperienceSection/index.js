@@ -49,7 +49,8 @@ export const ExperienceSection = (props) => {
         >
           <Grid
             item
-            xs={4}
+            xs={12}
+            md={4}
           >
             <Box
               sx={{
@@ -149,7 +150,8 @@ export const ExperienceSection = (props) => {
           </Grid>
           <Grid
             item
-            xs={4}
+            xs={12}
+            md={4}
           >
             <Box
               sx={{
@@ -249,7 +251,8 @@ export const ExperienceSection = (props) => {
           </Grid>
           <Grid
             item
-            xs={4}
+            xs={12}
+            md={4}
           >
             <Box
               sx={{

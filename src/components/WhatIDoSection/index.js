@@ -12,35 +12,19 @@ export const WhatIDoSection = (props) => {
       }}
     >
       <Container maxWidth="xl">
-        <Grid container spacing={4}>
+        <Grid
+          container
+          spacing={4}
+          sx={{
+            "@media (min-width: 768px)": {
+              flexDirection: "row-reverse"
+            }
+          }}
+        >
           <Grid
             item
-            xs={6}
-          >
-            <Box
-              sx={{
-                overflow: "hidden",
-                borderRadius: "10px",
-
-                "img": {
-                  width: "100%",
-                  height: "auto",
-                  maxWidth: "100%"
-                }
-              }}
-            >
-              <Image
-                src={'/img02.gif'}
-                width={500}
-                height={500}
-                unoptimized
-                alt=""
-              />
-            </Box>
-          </Grid>
-          <Grid
-            item
-            xs={6}
+            xs={12}
+            md={6}
             sx={{
               display: "flex"
             }}
@@ -103,10 +87,16 @@ export const WhatIDoSection = (props) => {
               >
                 <Box
                   sx={{
-                    padding: "10px",
+                    padding: "3px",
                     border: "1px solid #373737",
                     backgroundColor: "#2b2b2b",
                     borderRadius: "4px",
+                    width: "40px",
+
+                    "@media (min-width: 768px)": {
+                      width: "auto",
+                      padding: "10px"
+                    },
 
                     "img": {
                       maxWidth: "100%",
@@ -123,10 +113,16 @@ export const WhatIDoSection = (props) => {
                 </Box>
                 <Box
                   sx={{
-                    padding: "10px",
+                    padding: "3px",
                     border: "1px solid #373737",
                     backgroundColor: "#2b2b2b",
                     borderRadius: "4px",
+                    width: "40px",
+
+                    "@media (min-width: 768px)": {
+                      width: "auto",
+                      padding: "10px"
+                    },
 
                     "img": {
                       maxWidth: "100%",
@@ -143,10 +139,16 @@ export const WhatIDoSection = (props) => {
                 </Box>
                 <Box
                   sx={{
-                    padding: "10px",
+                    padding: "3px",
                     border: "1px solid #373737",
                     backgroundColor: "#2b2b2b",
                     borderRadius: "4px",
+                    width: "40px",
+
+                    "@media (min-width: 768px)": {
+                      width: "auto",
+                      padding: "10px"
+                    },
 
                     "img": {
                       maxWidth: "100%",
@@ -163,10 +165,16 @@ export const WhatIDoSection = (props) => {
                 </Box>
                 <Box
                   sx={{
-                    padding: "10px",
+                    padding: "3px",
                     border: "1px solid #373737",
                     backgroundColor: "#2b2b2b",
                     borderRadius: "4px",
+                    width: "40px",
+
+                    "@media (min-width: 768px)": {
+                      width: "auto",
+                      padding: "10px"
+                    },
 
                     "img": {
                       maxWidth: "100%",
@@ -183,10 +191,16 @@ export const WhatIDoSection = (props) => {
                 </Box>
                 <Box
                   sx={{
-                    padding: "10px",
+                    padding: "3px",
                     border: "1px solid #373737",
                     backgroundColor: "#2b2b2b",
                     borderRadius: "4px",
+                    width: "40px",
+
+                    "@media (min-width: 768px)": {
+                      width: "auto",
+                      padding: "10px"
+                    },
 
                     "img": {
                       maxWidth: "100%",
@@ -232,6 +246,32 @@ export const WhatIDoSection = (props) => {
                   ⚡ Integration of third party services such as Firebase/ AWS / Digital Ocean
                 </ListItem>
               </List>
+            </Box>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            md={6}
+          >
+            <Box
+              sx={{
+                overflow: "hidden",
+                borderRadius: "10px",
+
+                "img": {
+                  width: "100%",
+                  height: "auto",
+                  maxWidth: "100%"
+                }
+              }}
+            >
+              <Image
+                src={'/img02.gif'}
+                width={500}
+                height={500}
+                unoptimized
+                alt=""
+              />
             </Box>
           </Grid>
         </Grid>
