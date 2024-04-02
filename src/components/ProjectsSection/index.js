@@ -25,7 +25,7 @@ export default async function ProjectsSection() {
           <Typography
             variant="h2"
             sx={{
-              fontSize: "30px",
+              fontSize: "40px",
               lineHeight: "1.5",
               display: "flex",
               width: "100%",
