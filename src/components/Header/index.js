@@ -18,26 +18,19 @@ import Link from "next/link";
 const pages = [
   { label: "Home", path: "/" },
   { label: "Projects", path: "/projects" },
+  { label: "Assistant", path: "/assistant" },
 ];
 
 function Header() {
   const pathname = usePathname();
   const [anchorElNav, setAnchorElNav] = React.useState();
-  const [anchorElUser, setAnchorElUser] = React.useState();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
   };
 
   return (
@@ -149,7 +142,7 @@ function Header() {
             {pages.map(({ label, path }) => (
               <Link key={path} href={path}>
                 <Button
-                  className={pathname === path && "active" || ''}
+                  className={(pathname === path && "active") || ""}
                   sx={{
                     display: "block",
                     color: "#fff",

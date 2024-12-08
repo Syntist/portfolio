@@ -44,3 +44,13 @@ body{
     text-wrap: balance;
   }
 }
+
+
+
+.MuiInputLabel-formControl:not(.Mui-focused) {
+  color: white;
+}
+
+.MuiInputBase-input {
+  color: white;
+}

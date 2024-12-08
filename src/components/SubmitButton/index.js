@@ -1,14 +1,10 @@
 "use client";
 
 import { Button } from "@mui/material";
-import { useFormStatus } from "react-dom";
 
-
-export const SubmitButton = ({ children }) => {
-  const { pending } = useFormStatus();
-
+export const SubmitButton = ({ children, isPending, ...rest }) => {
   return (
-    <Button disabled={pending} type="submit">
+    <Button disabled={isPending} type="submit" {...rest}>
       {children}
     </Button>
   );

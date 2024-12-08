@@ -5,27 +5,24 @@ import { ObjectId } from "mongodb";
 import { revalidatePath } from "next/cache";
 
 let Projects = db.collection("projects");
-Projects.createIndex({ github: 1 }, { unique: true });
+Projects.createIndex({ github: 1, url: 1, title: 1 }, { unique: true });
 
-export const createProject = async (prevState, formData) => {
-  const github = formData.get("github");
-
-  if (!github.includes("https://github.com/"))
-    return { errmsg: "Should be a github link" };
-
+export const createProject = async (formData) => {
   try {
-    const project = await Projects.insertOne({
-      github,
-    });
+    if (!formData) throw { errmsg: "No formdata given" };
+
+    const project = await Projects.insertOne(formData);
 
     if (project) {
       revalidatePath("/");
       revalidatePath("/projects");
 
-      return {acknowledged: true};
+      return { acknowledged: true };
     }
   } catch (e) {
-    return e.errorResponse;
+    const error = e.errorResponse ? e.errorResponse : e;
+
+    return Promise.reject(JSON.stringify(error));
   }
 };
 
@@ -35,11 +32,17 @@ export const getProjects = async () => {
   return projects;
 };
 
+export const getProject = async (handler) => {
+  const project = Projects.findOne({ handler: handler });
+
+  return project;
+};
+
 export const deleteProject = async (prevState, formData) => {
   const projectId = formData.get("projectId");
 
   try {
-    const project = await Projects.deleteOne({ _id: new ObjectId(projectId)});
+    const project = await Projects.deleteOne({ _id: new ObjectId(projectId) });
 
     if (project) {
       revalidatePath("/");
