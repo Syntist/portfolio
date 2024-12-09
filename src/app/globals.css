@@ -54,6 +54,20 @@ body{
 .MuiInputBase-input {
   color: white;
 }
-.MuiTabs-flexContainer button, .MuiTabs-flexContainer [type="button"], .MuiTabs-flexContainer [type="reset"], [type="submit"] {
+.MuiTab-textColorPrimary {
   color: white;
 }
+.MuiCircularProgress-colorPrimary {
+  margin: 40px auto;
+  display: block;
+}
+.project-link {
+  display: block;
+  width: 100%;
+  transition: transform 0.3s ease;
+  transform: scale(1);
+}
+.wmde-markdown {
+  padding: 10px;
+}
+

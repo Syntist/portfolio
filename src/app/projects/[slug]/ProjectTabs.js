@@ -23,7 +23,7 @@ export default function ProjectTabs({ project, readmeData, repoData }) {
   const numTab = project.description ? 2 : 1;
 
   return (
-    <Box sx={{ width: "80%", margin: "0 auto", mt: 10 }}>
+    <Box sx={{ width: "100%", margin: "0 auto 20px", padding: "0 24px", mt: 10 }}>
       <ProjectInfo project={repoData} id={project._id} url={project.url} />
 
       {/* Tabs for Description and README */}
