@@ -1,17 +1,18 @@
 "use client";
 
 import React, { useState } from "react";
-import { Tabs, Tab, Box, Typography } from "@mui/material";
+import { Tabs, Tab, Box } from "@mui/material";
 import dynamic from "next/dynamic";
 import "@uiw/react-markdown-preview/markdown.css";
 import { ProjectInfo } from "@/components/ProjectInfo";
+import ChatStream from "@/app/assistant/chat";
 
 // Dynamically import MarkdownPreview to avoid SSR issues
 const MarkdownPreview = dynamic(() => import("@uiw/react-markdown-preview"), {
   ssr: false,
 });
 
-export default function ProjectTabs({ project, readmeData, repoData }) {
+export default function ProjectTabs({ project, readmeData, repoData, context }) {
   const [selectedTab, setSelectedTab] = useState(0);
 
   const handleTabChange = (event, newValue) => {
@@ -33,13 +34,19 @@ export default function ProjectTabs({ project, readmeData, repoData }) {
       >
         {project.description && <Tab label="Description" />}
         <Tab label="GitHub README" />
+        <Tab label="Interactive Information" />
       </Tabs>
+      {selectedTab < 2 && (
+        <Box sx={{ mt: 2 }}>
+          <MarkdownPreview
+            source={
+              selectedTab === 0 ? project.description || readmeData : readmeData
+            }
+          />
+        </Box>
+      )}
 
-      <Box sx={{ mt: 2 }}>
-        <MarkdownPreview
-          source={selectedTab === 0 ? project.description || readmeData : readmeData}
-        />
-      </Box>
+      {selectedTab === 2 && <ChatStream context={context} />}
     </Box>
   );
 }

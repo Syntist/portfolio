@@ -23,7 +23,7 @@ export const ProjectInfo = ({ project }) => {
         >
           {project?.name}
         </Typography>
-        {project?.data?.description && (
+        {project?.description && (
           <Typography
             variant="body1"
             sx={{

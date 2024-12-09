@@ -4,16 +4,14 @@ import { chatbot } from "@/server-action/chatbot";
 import {
   TextField,
   Button,
-  Paper,
   Typography,
-  Avatar,
   Box,
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 
-export default function ChatStream() {
+export default function ChatStream({ context }) {
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState([]);
   const [response, setResponse] = useState("");
@@ -30,12 +28,21 @@ export default function ChatStream() {
     ]);
   };
 
+  const chatEndRef = useRef(null);
+
+  // Scroll to the end of the chat whenever chat updates
+  useEffect(() => {
+    if (chatEndRef.current) {
+      chatEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [chat]);
+
   const fetchChatStream = async (data) => {
     setLoading(true);
     setMessage("");
     updateChat(data, "user");
 
-    const stream = await chatbot(data, chat);
+    const stream = await chatbot(data, chat, context);
 
     const reader = stream.getReader();
     const decoder = new TextDecoder();
@@ -75,8 +82,6 @@ export default function ChatStream() {
         color: "#f5f5f5",
       }}
     >
-      {/* Header */}
-      {/* Chat History */}
       <Box
         sx={{
           flexGrow: 1,
@@ -153,18 +158,22 @@ export default function ChatStream() {
                 </Box>
               </Box>
             )}
+
           </>
         ))}
+				
       </Box>
 
       {/* Chat Input */}
       <Box
         sx={{
+          position: "sticky",
+          bottom: 0,
+          backgroundColor: "#1e1e1e",
           padding: 2,
           borderTop: "1px solid #444",
           display: "flex",
           alignItems: "center",
-          backgroundColor: "#1e1e1e",
         }}
       >
         <TextField
