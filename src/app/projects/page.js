@@ -7,11 +7,13 @@ export default async function Projects() {
 
   return (
     <Box mt={10}>
-      {projects.map((project) => (
-        <Box key={project?._id}>
-          <ProjectCard project={project} />
-        </Box>
-      ))}
+      <Box sx={{ width: "100%", margin: "0 auto 20px", padding: "0 24px", mt: 10 }}>
+        {projects.map((project) => (
+          <Box key={project?._id} mt={2}>
+            <ProjectCard project={project} />
+          </Box>
+        ))}
+      </Box>
     </Box>
   );
 }

@@ -9,19 +9,8 @@ export const ProjectCard = async ({ project }) => {
   return (
     <>
       <Link
+        className="project-link"
         href={`/projects/${project?.handler}`}
-        sx={{
-          display: "flex",
-          fontFamily: "roboto",
-          width: "100%",
-          textDecoration: "none",
-          transition: "transform 0.3s ease",
-          transform: "scale(1)",
-
-          "&:hover": {
-            transform: "scale(1.01)",
-          },
-        }}
       >
         <Card
           sx={{
@@ -32,6 +21,7 @@ export const ProjectCard = async ({ project }) => {
             flexDirection: "column",
             border: "1px solid #373737",
             backgroundColor: "#2b2b2b",
+            minHeight: "100%",
           }}
         >
           <ProjectInfo

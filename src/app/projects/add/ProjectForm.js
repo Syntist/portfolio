@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import { errorHandler } from "@/utils/helper";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { Padding } from "@mui/icons-material";
 
 // Dynamically import MDEditor to avoid SSR issues
 const MDEditor = dynamic(() => import("@uiw/react-md-editor"), { ssr: true });
@@ -53,7 +54,7 @@ export const ProjectForm = () => {
 
   return (
     <Box mt={10}>
-      <Box mt={5} style={{ width: "85%", margin: "0 auto" }}>
+      <Box sx={{ width: "100%", margin: "0 auto 20px", padding: "0 24px", mt: 10 }}>
         <Typography variant="h5" mb={2}>
           Create a New Project
         </Typography>
