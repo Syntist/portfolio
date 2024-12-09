@@ -1,18 +1,15 @@
 import { getRepoData } from "@/server-action/github";
-import { Box, Card, Typography } from "@mui/material";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import StarsIcon from "@mui/icons-material/Stars";
-import { DeleteProject } from "@/components/DeleteProject";
+import { Card } from "@mui/material";
 import Link from "next/link";
 import { ProjectInfo } from "@/components/ProjectInfo";
 
-export const ProjectCard = async ({ id, url, handler }) => {
-  const project = await getRepoData(url);
+export const ProjectCard = async ({ project }) => {
+  const gitInfo = await getRepoData(project?.github);
 
   return (
     <>
       <Link
-        href={`/projects/${handler}`}
+        href={`/projects/${project?.handler}`}
         sx={{
           display: "flex",
           fontFamily: "roboto",
@@ -34,13 +31,16 @@ export const ProjectCard = async ({ id, url, handler }) => {
             width: "100%",
             flexDirection: "column",
             border: "1px solid #373737",
-            backgroundColor: "#2b2b2b"
+            backgroundColor: "#2b2b2b",
           }}
         >
-          <ProjectInfo project={project.data} />
+          <ProjectInfo
+            project={gitInfo.data}
+            id={project?._id}
+            url={project?.url}
+          />
         </Card>
       </Link>
-      {id && <DeleteProject id={id} />}
     </>
   );
 };

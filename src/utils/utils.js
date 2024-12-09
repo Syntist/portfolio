@@ -1,3 +1,5 @@
+"use server";
+
 const { default: axios } = require("axios");
 
 /**

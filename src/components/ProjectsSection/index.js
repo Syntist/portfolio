@@ -1,7 +1,7 @@
-import * as React from 'react';
+import * as React from "react";
 // import { Wrapper, Heading, Description } from './style';
 import { createProject, getProjects } from "@/server-action/project";
-import { Box, Typography, Container, Grid } from '@mui/material';
+import { Box, Typography, Container, Grid } from "@mui/material";
 import { ProjectCard } from "../../app/projects/ProjectCard";
 
 export default async function ProjectsSection() {
@@ -13,13 +13,13 @@ export default async function ProjectsSection() {
         width: "100%",
         overflow: "hidden",
         paddingTop: "50px",
-        paddingBottom: "50px"
+        paddingBottom: "50px",
       }}
     >
       <Container maxWidth="xl">
         <Box
           sx={{
-            marginBottom: "45px"
+            marginBottom: "45px",
           }}
         >
           <Typography
@@ -41,8 +41,8 @@ export default async function ProjectsSection() {
                 backgroundColor: "currentcolor",
                 opacity: "0.1",
                 position: "relative",
-                top: "-9px"
-              }
+                top: "-9px",
+              },
             }}
           >
             My Projects
@@ -56,10 +56,10 @@ export default async function ProjectsSection() {
               xs={6}
               md={4}
               sx={{
-                display: "flex"
+                display: "flex",
               }}
             >
-              <ProjectCard key={project._id} url={project.github} />
+              <ProjectCard key={project?._id} project={project} />
             </Grid>
           ))}
         </Grid>

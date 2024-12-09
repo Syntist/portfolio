@@ -1,12 +1,7 @@
 "use client";
 
 import { chatbot } from "@/server-action/chatbot";
-import {
-  TextField,
-  Button,
-  Typography,
-  Box,
-} from "@mui/material";
+import { TextField, Button, Typography, Box } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
@@ -93,6 +88,27 @@ export default function ChatStream({ context }) {
           gap: 2,
         }}
       >
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "flex-start",
+          }}
+        >
+          <Box
+            sx={{
+              padding: 1.5,
+              backgroundColor: "#555",
+              color: "#fff",
+              borderRadius: 2,
+              maxWidth: "70%",
+            }}
+          >
+            <Typography variant="body1">
+              How can I help you?
+            </Typography>
+          </Box>
+        </Box>
+
         {chat?.map((entry, index) => (
           <>
             <Box
@@ -118,7 +134,7 @@ export default function ChatStream({ context }) {
               </Box>
             </Box>
 
-            {loading && response && chat.length - 1 === index && (
+            {loading && chat.length - 1 === index && (
               <Box
                 key={index}
                 sx={{
@@ -153,15 +169,13 @@ export default function ChatStream({ context }) {
                       animation: "pulse 1.5s infinite",
                     }}
                   >
-                    typing...
+                    {!response ? "thinking..." : "typing..."}
                   </Box>
                 </Box>
               </Box>
             )}
-
           </>
         ))}
-				
       </Box>
 
       {/* Chat Input */}

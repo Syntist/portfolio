@@ -1,23 +1,34 @@
 "use client";
 
-import { SubmitButton } from "@/components/SubmitButton";
 import { deleteProject } from "@/server-action/project";
-import { useEffect } from "react";
-import { useFormState } from "react-dom";
 import { toast } from "react-toastify";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { useState } from "react";
+import { IconButton } from "@mui/material";
+import { useRouter } from "next/navigation";
 
 export const DeleteProject = ({ id }) => {
-  const [state, formAction] = useFormState(deleteProject, null);
+  const router = useRouter();
+  const [loading, setLoading] = useState();
 
-  useEffect(() => {
-    if (state?.deleted) toast.success("Deleted - " + id);
-    else if (state?.deleted === false) toast.error("Error Deleting - " + id);
-  }, [id, state]);
+  const projectDeletion = (id) => {
+    setLoading(true);
+    deleteProject(id)
+      .then(() => {
+        toast.success("Project Deleted");
+        router.push("/projects");
+      })
+      .catch((e) => toast.error(e))
+      .finally(() => setLoading(false));
+  };
 
   return (
-    <form action={formAction}>
-      <input name="projectId" value={id} hidden readOnly />
-      <SubmitButton>Delete</SubmitButton>
-    </form>
+    <IconButton
+      color="error"
+      disabled={loading}
+      onClick={() => projectDeletion(id)}
+    >
+      <DeleteIcon />
+    </IconButton>
   );
 };

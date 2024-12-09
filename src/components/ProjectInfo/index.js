@@ -1,9 +1,10 @@
-import { Box, Typography } from "@mui/material";
+import { Box, IconButton, Link, Typography } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import StarsIcon from "@mui/icons-material/Stars";
+import { DeleteProject } from "../DeleteProject";
+import OpenInBrowserIcon from "@mui/icons-material/OpenInBrowser";
 
-export const ProjectInfo = ({ project }) => {
-
+export const ProjectInfo = ({ project, id, url }) => {
   return (
     <Box>
       <Box
@@ -11,18 +12,37 @@ export const ProjectInfo = ({ project }) => {
           flexGrow: "1",
         }}
       >
-        <Typography
-          variant="h3"
+        <Box
           sx={{
-            fontSize: "24px",
-            lineHeight: "1.5",
-            marginBottom: "16px",
-            wordBreak: "break-word",
-            color: "#fff",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
           }}
         >
-          {project?.name}
-        </Typography>
+          <Typography
+            variant="h3"
+            sx={{
+              fontSize: "24px",
+              lineHeight: "1.5",
+              marginBottom: "0",
+              wordBreak: "break-word",
+              color: "#fff",
+            }}
+          >
+            {project?.name} {"        "}
+            <Link href={project?.html_url} target="_blank">
+              <GitHubIcon />
+            </Link>
+            {"        "}
+            {url && (
+              <Link href={url} target="_blank">
+                <OpenInBrowserIcon />
+              </Link>
+            )}
+          </Typography>
+
+          <DeleteProject id={id} />
+        </Box>
         {project?.description && (
           <Typography
             variant="body1"
@@ -36,6 +56,7 @@ export const ProjectInfo = ({ project }) => {
           </Typography>
         )}
       </Box>
+      <Box></Box>
       <Box
         sx={{
           display: "flex",

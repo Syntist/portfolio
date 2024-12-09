@@ -27,22 +27,21 @@ export const createProject = async (formData) => {
 };
 
 export const getProjects = async () => {
-  const projects = Projects.find({}).toArray();
+  const projects = await Projects.find({}).toArray();
 
   return projects;
 };
 
 export const getProject = async (handler) => {
-  const project = Projects.findOne({ handler: handler });
+  const project = await Projects.findOne({ handler: handler });
 
-  return project;
+  return {...project, _id: project._id.toJSON()};
 };
 
-export const deleteProject = async (prevState, formData) => {
-  const projectId = formData.get("projectId");
+export const deleteProject = async (id) => {
 
   try {
-    const project = await Projects.deleteOne({ _id: new ObjectId(projectId) });
+    const project = await Projects.deleteOne({ _id: new ObjectId(id) });
 
     if (project) {
       revalidatePath("/");

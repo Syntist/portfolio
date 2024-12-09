@@ -5,23 +5,26 @@ import { Tabs, Tab, Box } from "@mui/material";
 import dynamic from "next/dynamic";
 import "@uiw/react-markdown-preview/markdown.css";
 import { ProjectInfo } from "@/components/ProjectInfo";
-import ChatStream from "@/app/assistant/chat";
+import InteractiveMode from "./InteractiveMode";
 
 // Dynamically import MarkdownPreview to avoid SSR issues
 const MarkdownPreview = dynamic(() => import("@uiw/react-markdown-preview"), {
   ssr: false,
 });
 
-export default function ProjectTabs({ project, readmeData, repoData, context }) {
+export default function ProjectTabs({ project, readmeData, repoData }) {
   const [selectedTab, setSelectedTab] = useState(0);
+  const [context, setContext] = useState("");
 
   const handleTabChange = (event, newValue) => {
     setSelectedTab(newValue);
   };
 
+  const numTab = project.description ? 2 : 1;
+
   return (
     <Box sx={{ width: "80%", margin: "0 auto", mt: 10 }}>
-      <ProjectInfo project={repoData} />
+      <ProjectInfo project={repoData} id={project._id} url={project.url} />
 
       {/* Tabs for Description and README */}
       <Tabs
@@ -34,9 +37,9 @@ export default function ProjectTabs({ project, readmeData, repoData, context }) 
       >
         {project.description && <Tab label="Description" />}
         <Tab label="GitHub README" />
-        <Tab label="Interactive Information" />
+        <Tab label="Interactive Mode" />
       </Tabs>
-      {selectedTab < 2 && (
+      {selectedTab < numTab && (
         <Box sx={{ mt: 2 }}>
           <MarkdownPreview
             source={
@@ -46,7 +49,13 @@ export default function ProjectTabs({ project, readmeData, repoData, context }) 
         </Box>
       )}
 
-      {selectedTab === 2 && <ChatStream context={context} />}
+      {selectedTab === numTab && (
+        <InteractiveMode
+          project={project}
+          context={context}
+          setContext={setContext}
+        />
+      )}
     </Box>
   );
 }
