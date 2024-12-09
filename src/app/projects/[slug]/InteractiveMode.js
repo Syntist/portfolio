@@ -1,5 +1,6 @@
 import ChatStream from "@/app/assistant/chat";
 import { retrieveGitHubRepoInfo } from "@/utils/utils";
+import { CircularProgress } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
 export default function InteractiveMode({ project, context, setContext }) {
@@ -14,5 +15,7 @@ export default function InteractiveMode({ project, context, setContext }) {
     }
   }, [context, project.github, setContext]);
 
-  return <>{loading ? "Loading" : <ChatStream context={context} />}</>;
+  return (
+    <>{loading ? <CircularProgress /> : <ChatStream context={context} />}</>
+  );
 }

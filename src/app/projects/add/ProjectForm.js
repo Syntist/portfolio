@@ -41,7 +41,7 @@ export const ProjectForm = () => {
     validationSchema,
     onSubmit: (values, { resetForm }) => {
       let handler = values.title.replaceAll(" ", "-");
-      
+
         createProject({ ...values, handler })
           .then(() => {
             toast.success("Project created successfully!");
@@ -77,6 +77,7 @@ export const ProjectForm = () => {
             <MDEditor
               value={values.description}
               onChange={(value) => setFieldValue("description", value)}
+              theme="dark"
               height={400}
             />
           </Box>

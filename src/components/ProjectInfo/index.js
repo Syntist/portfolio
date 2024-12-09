@@ -29,7 +29,8 @@ export const ProjectInfo = ({ project, id, url }) => {
               color: "#fff",
             }}
           >
-            {project?.name} {"        "}
+            {project?.name}
+            {"        "}
             <Link href={project?.html_url} target="_blank">
               <GitHubIcon />
             </Link>

@@ -1,6 +1,6 @@
 import * as React from "react";
 // import { Wrapper, Heading, Description } from './style';
-import { createProject, getProjects } from "@/server-action/project";
+import { getProjects } from "@/server-action/project";
 import { Box, Typography, Container, Grid } from "@mui/material";
 import { ProjectCard } from "../../app/projects/ProjectCard";
 
@@ -51,7 +51,7 @@ export default async function ProjectsSection() {
         <Grid container spacing={2}>
           {projects.map((project) => (
             <Grid
-              key={project._id}
+              key={project._id.toString()}
               item
               xs={6}
               md={4}
@@ -59,7 +59,7 @@ export default async function ProjectsSection() {
                 display: "flex",
               }}
             >
-              <ProjectCard key={project?._id} project={project} />
+              <ProjectCard key={project?._id.toString()} project={project} />
             </Grid>
           ))}
         </Grid>
