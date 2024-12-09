@@ -54,3 +54,6 @@ body{
 .MuiInputBase-input {
   color: white;
 }
+.MuiTabs-flexContainer button, .MuiTabs-flexContainer [type="button"], .MuiTabs-flexContainer [type="reset"], [type="submit"] {
+  color: white;
+}
