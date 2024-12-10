@@ -29,7 +29,16 @@ export const createProject = async (formData) => {
 export const getProjects = async () => {
   const projects = await Projects.find({}).toArray();
 
-  return projects;
+  const plainProjects = projects.map(project => {
+    const plainProject = {...project};
+
+    plainProject._id = project._id.toString();
+
+
+    return plainProject;
+  });
+
+  return plainProjects;
 };
 
 export const getProject = async (handler) => {
