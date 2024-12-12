@@ -26,14 +26,37 @@ export const createProject = async (formData) => {
   }
 };
 
+export const updateProject = async (formData) => {
+  try {
+    if (!formData) throw { errmsg: "No formdata given" };
+
+    const { _id, ...updateData } = formData;
+
+    const project = await Projects.updateOne(
+      { _id: new ObjectId(_id) },
+      { $set: updateData }
+    );
+
+    if (project) {
+      revalidatePath("/");
+      revalidatePath("/projects");
+
+      return { acknowledged: true };
+    }
+  } catch (e) {
+    const error = e.errorResponse ? e.errorResponse : e;
+
+    return Promise.reject(JSON.stringify(error));
+  }
+};
+
 export const getProjects = async () => {
   const projects = await Projects.find({}).toArray();
 
-  const plainProjects = projects.map(project => {
-    const plainProject = {...project};
+  const plainProjects = projects.map((project) => {
+    const plainProject = { ...project };
 
-    plainProject._id = project._id.toString();
-
+    plainProject._id = project?._id?.toString();
 
     return plainProject;
   });
@@ -44,11 +67,10 @@ export const getProjects = async () => {
 export const getProject = async (handler) => {
   const project = await Projects.findOne({ handler: handler });
 
-  return {...project, _id: project._id.toJSON()};
+  return { ...project, _id: project?._id?.toJSON() };
 };
 
 export const deleteProject = async (id) => {
-
   try {
     const project = await Projects.deleteOne({ _id: new ObjectId(id) });
 

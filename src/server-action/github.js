@@ -3,6 +3,7 @@
 import baseApi from "@/baseApi";
 
 export const getRepoData = async (url) => {
+  console.log(url)
   const link = url?.split("://")[1].split('/')
 
   try {
@@ -10,7 +11,7 @@ export const getRepoData = async (url) => {
       `https://api.github.com/repos/${link[1]}/${link[2]}`
     );
 
-    return content;
+    return content.data;
   } catch (e) {
     return e;
   }

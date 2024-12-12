@@ -1,28 +1,7 @@
+import { experience } from "@/info/experience";
 import { Typography, Box, Container, Grid } from "@mui/material";
 import Image from "next/image";
 
-const exp = [
-  {
-    title: "Facebook",
-    role: "Software Engineer",
-    startDate: "June 2018",
-    endDate: "Present",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    backgroundColor: "#2b2b2b",
-    logo: "/facebookLogo.f46d68b24e9b4f73ee8b.png",
-  },
-  {
-    title: "Facebook",
-    role: "Software Engineer",
-    startDate: "June 2018",
-    endDate: "Present",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    backgroundColor: "#2b2b2b",
-    logo: "/facebookLogo.f46d68b24e9b4f73ee8b.png",
-  },
-];
 
 export const ExperienceSection = () => (
   <Box
@@ -66,11 +45,10 @@ export const ExperienceSection = () => (
         </Typography>
       </Box>
       <Grid container spacing={4}>
-        {exp.map((item) => (
+        {experience.map((item) => (
           <Grid key={item.title} item xs={4}>
             <Box
               sx={{
-                backgroundColor: item.backgroundColor,
                 border: "1px solid #373737",
                 borderRadius: "8px",
                 textAlign: "center",
@@ -79,7 +57,7 @@ export const ExperienceSection = () => (
               <Box
                 sx={{
                   padding: "24px",
-                  backgroundColor: "rgb(20, 124, 244)",
+                  backgroundColor: item.backgroundColor,
                   borderRadius: "8px 8px 0 0",
                 }}
               >
@@ -110,7 +88,7 @@ export const ExperienceSection = () => (
                     },
                   }}
                 >
-                  <Image src={item.logo} width={100} height={100} alt="" />
+                  <Image src={item.logo} width={100} height={100} style={{backgroundColor: item.imageBackgroundColor}} alt="" />
                 </Box>
               </Box>
               <Box

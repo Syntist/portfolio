@@ -29,8 +29,15 @@ export default function ProjectTabs({ project, repoData }) {
   }, [project.github]);
 
   return (
-    <Box sx={{ width: "100%", margin: "0 auto 20px", padding: "0 24px", mt: 10 }}>
-      <ProjectInfo project={repoData} id={project._id} url={project.url} />
+    <Box
+      sx={{ width: "100%", margin: "0 auto 20px", padding: "0 24px", mt: 10 }}
+    >
+      <ProjectInfo
+        github={project.github}
+        id={project._id}
+        url={project.url}
+        handler={project.handler}
+      />
 
       {/* Tabs for Description and README */}
       <Tabs

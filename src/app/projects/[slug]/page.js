@@ -8,12 +8,9 @@ export default async function ProjectPage({ params }) {
 
   const project = await getProject(slug);
 
-  const repoData = await getRepoData(project.github);
-
   return (
     <ProjectTabs
       project={project}
-      repoData={repoData.data}
     />
   );
 }

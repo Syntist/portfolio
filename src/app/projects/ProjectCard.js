@@ -4,7 +4,6 @@ import Link from "next/link";
 import { ProjectInfo } from "@/components/ProjectInfo";
 
 export const ProjectCard = async ({ project }) => {
-  const gitInfo = await getRepoData(project?.github);
 
   return (
     <>
@@ -25,9 +24,10 @@ export const ProjectCard = async ({ project }) => {
           }}
         >
           <ProjectInfo
-            project={gitInfo.data}
             id={project?._id}
+            github={project?.github}
             url={project?.url}
+            handler={project.handler}
           />
         </Card>
       </Link>

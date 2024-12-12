@@ -1,11 +1,19 @@
 "use server";
 
+import { personalContext } from "@/utils/chatContext";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_CHAT_API);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-export async function chatbot(contents, history, context) {
+export async function chatbot(contents, history, oContext) {
+  let context;
+  if (oContext === "self") {
+    context = personalContext;
+  } else {
+    context = oContext;
+  }
+
   const encoder = new TextEncoder();
   const readableStream = new ReadableStream({
     async start(controller) {
