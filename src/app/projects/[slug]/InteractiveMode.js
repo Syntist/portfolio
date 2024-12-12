@@ -1,5 +1,5 @@
 import ChatStream from "@/app/assistant/chat";
-import { retrieveGitHubRepoInfo } from "@/utils/utils";
+import { contextSession } from "@/server-action/chatbot";
 import { CircularProgress } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
@@ -9,11 +9,11 @@ export default function InteractiveMode({ project, context, setContext }) {
   useEffect(() => {
     if (!context) {
       setLoading(true);
-      retrieveGitHubRepoInfo(project.github)
+      contextSession(project._id, project.github)
         .then((res) => setContext(res))
         .finally(() => setLoading(false));
     }
-  }, [context, project.github, setContext]);
+  }, [context, project._id, project.github, setContext]);
 
   return (
     <>{loading ? <CircularProgress /> : <ChatStream context={context} />}</>
