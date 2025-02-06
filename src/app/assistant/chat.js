@@ -1,6 +1,6 @@
 "use client";
 
-import { chatbot } from "@/server-action/chatbot";
+import { chatbot, testChatBot } from "@/server-action/chatbot";
 import { TextField, Button, Typography, Box } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { useEffect, useRef, useState } from "react";
@@ -9,18 +9,30 @@ import ReactMarkdown from "react-markdown";
 export default function ChatStream({ context }) {
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState([]);
+  const [openai, setOpenai] = useState(false);
+
   const [response, setResponse] = useState("");
 
   const [loading, setLoading] = useState("");
 
   const updateChat = (msg, role) => {
-    setChat((prev) => [
-      ...prev,
-      {
-        role: role,
-        parts: [{ text: msg }],
-      },
-    ]);
+    if (!openai) {
+      setChat((prev) => [
+        ...prev,
+        {
+          role: role,
+          parts: [{ text: msg }],
+        },
+      ]);
+    } else {
+      setChat((prev) => [
+        ...prev,
+        {
+          role: role,
+          content: msg,
+        },
+      ]);
+    }
   };
 
   const chatEndRef = useRef(null);
@@ -37,7 +49,7 @@ export default function ChatStream({ context }) {
     setMessage("");
     updateChat(data, "user");
 
-    const stream = await chatbot(data, chat, context);
+    const stream = await (openai ? testChatBot : chatbot)(data, chat, context);
 
     const reader = stream.getReader();
     const decoder = new TextDecoder();
@@ -48,7 +60,7 @@ export default function ChatStream({ context }) {
       const { value, done } = await reader.read();
       if (done) {
         setResponse("");
-        updateChat(msg, "model");
+        updateChat(msg, openai ? "assistant" : "model");
 
         break;
       }
@@ -103,9 +115,7 @@ export default function ChatStream({ context }) {
               maxWidth: "70%",
             }}
           >
-            <Typography variant="body1">
-              How can I help you?
-            </Typography>
+            <Typography variant="body1">How can I help you?</Typography>
           </Box>
         </Box>
 
@@ -129,7 +139,9 @@ export default function ChatStream({ context }) {
                 }}
               >
                 <Typography variant="body1">
-                  <ReactMarkdown>{entry.parts[0].text}</ReactMarkdown>
+                  <ReactMarkdown>
+                    {entry?.parts?.[0]?.text || entry?.content}
+                  </ReactMarkdown>
                 </Typography>
               </Box>
             </Box>
