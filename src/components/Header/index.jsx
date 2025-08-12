@@ -6,15 +6,18 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
+import Drawer from "@mui/material/Drawer";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
-import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const pages = [
   { label: "Home", path: "/" },
@@ -24,7 +27,7 @@ const pages = [
 
 function Header() {
   const pathname = usePathname();
-  const [anchorElNav, setAnchorElNav] = React.useState();
+  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const [scrolled, setScrolled] = React.useState(false);
 
   React.useEffect(() => {
@@ -34,171 +37,300 @@ function Header() {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
+  const handleOpenMobileMenu = () => {
+    setMobileMenuOpen(true);
   };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
+  const handleCloseMobileMenu = () => {
+    setMobileMenuOpen(false);
   };
 
   return (
-    <AppBar
-      position="sticky"
-      elevation={0}
-      sx={{
-        top: 0,
-        background: scrolled
-          ? "rgba(17, 20, 28, 0.72)"
-          : "linear-gradient(to bottom, rgba(17,20,28,.85), rgba(17,20,28,.25) 70%, rgba(17,20,28,0))",
-        backdropFilter: "blur(18px) saturate(140%)",
-        WebkitBackdropFilter: "blur(18px) saturate(140%)",
-        borderBottom: scrolled ? "1px solid rgba(255 255 255 / .08)" : "1px solid transparent",
-        transition: "all .5s ease",
-        color: "#fff",
-      }}
-    >
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component={Link}
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "var(--font-oswald)",
-              fontWeight: 600,
-              letterSpacing: ".15rem",
-              color: "inherit",
-              textDecoration: "none",
-              background: "var(--gradient-accent)",
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-            }}
-          >
-            TALHA
-          </Typography>
+    <>
+      <AppBar
+        position="sticky"
+        elevation={0}
+        sx={{
+          top: 0,
+          background: scrolled
+            ? "rgba(17, 20, 28, 0.85)"
+            : "linear-gradient(to bottom, rgba(17,20,28,.9), rgba(17,20,28,.3) 70%, rgba(17,20,28,0))",
+          backdropFilter: "blur(20px) saturate(150%)",
+          WebkitBackdropFilter: "blur(20px) saturate(150%)",
+          borderBottom: scrolled ? "1px solid rgba(255 255 255 / .1)" : "1px solid transparent",
+          transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+          color: "#fff",
+          zIndex: 1100,
+        }}
+      >
+        <Container
+          maxWidth="xl"
+          sx={{
+            px: { xs: 2, sm: 3, md: 4 },
+          }}
+        >
+          <Toolbar disableGutters sx={{ minHeight: { xs: 56, md: 64 } }}>
+            {/* Mobile menu button */}
+            <Box sx={{ display: { xs: "flex", md: "none" }, mr: 2 }}>
+              <IconButton
+                size="large"
+                aria-label="open navigation menu"
+                onClick={handleOpenMobileMenu}
+                color="inherit"
+                sx={{
+                  p: 1,
+                  transition: "transform 0.2s ease",
+                  "&:hover": {
+                    transform: "scale(1.1)",
+                    backgroundColor: "rgba(255 255 255 / 0.08)",
+                  },
+                }}
+              >
+                <MenuIcon fontSize="medium" />
+              </IconButton>
+            </Box>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
+            {/* Desktop logo */}
+            <Typography
+              variant="h6"
+              noWrap
+              component={Link}
+              href="/"
               sx={{
-                display: { xs: "block", md: "none" },
+                mr: 4,
+                display: { xs: "none", md: "flex" },
+                fontFamily: "var(--font-oswald)",
+                fontWeight: 700,
+                letterSpacing: ".1rem",
+                color: "inherit",
+                textDecoration: "none",
+                background: "var(--gradient-accent)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                fontSize: "1.3rem",
+                transition: "transform 0.2s ease",
+                "&:hover": {
+                  transform: "scale(1.02)",
+                },
               }}
             >
-              {pages.map(({ label, path }) => (
-                <MenuItem
-                  key={label}
-                  onClick={handleCloseNavMenu}
-                  sx={{
-                    color: "#000",
-                  }}
-                >
-                  <Link href={path}>
-                    <Typography textAlign="center">{label}</Typography>
-                  </Link>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component={Link}
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "var(--font-oswald)",
-              fontWeight: 600,
-              letterSpacing: ".2rem",
-              color: "inherit",
-              textDecoration: "none",
-              background: "var(--gradient-accent)",
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-            }}
-          >
-            TALHA
-          </Typography>
+              Syed Talha Khalid
+            </Typography>
+
+            {/* Mobile logo */}
+            <Typography
+              variant="h6"
+              noWrap
+              component={Link}
+              href="/"
+              sx={{
+                display: { xs: "flex", md: "none" },
+                flexGrow: 1,
+                fontFamily: "var(--font-oswald)",
+                fontWeight: 700,
+                letterSpacing: ".1rem",
+                color: "inherit",
+                textDecoration: "none",
+                background: "var(--gradient-accent)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                fontSize: "1.1rem",
+              }}
+            >
+              TALHA
+            </Typography>
+
+            {/* Desktop navigation */}
+            <Box
+              sx={{
+                flexGrow: 1,
+                display: { xs: "none", md: "flex" },
+                justifyContent: "flex-end",
+                gap: 1,
+              }}
+            >
+              {pages.map(({ label, path }) => {
+                const active = pathname === path;
+                return (
+                  <Box key={path} sx={{ position: "relative" }}>
+                    <Button
+                      component={Link}
+                      href={path}
+                      sx={{
+                        display: "block",
+                        color: active ? "#fff" : "rgba(255 255 255 / .8)",
+                        fontWeight: active ? 600 : 500,
+                        position: "relative",
+                        letterSpacing: ".3px",
+                        textTransform: "none",
+                        fontSize: "15px",
+                        px: 3,
+                        py: 1,
+                        borderRadius: 2,
+                        transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                        "&:hover": {
+                          color: "#fff",
+                          backgroundColor: "rgba(255 255 255 / 0.05)",
+                          transform: "translateY(-1px)",
+                        },
+                      }}
+                    >
+                      {label}
+                      <AnimatePresence mode="wait">
+                        {active && (
+                          <motion.span
+                            layoutId="nav-underline"
+                            initial={{ opacity: 0, scaleX: 0 }}
+                            animate={{ opacity: 1, scaleX: 1 }}
+                            exit={{ opacity: 0, scaleX: 0 }}
+                            style={{
+                              position: "absolute",
+                              left: 8,
+                              right: 8,
+                              bottom: 4,
+                              height: 2,
+                              borderRadius: 4,
+                              background: "linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899)",
+                              transformOrigin: "center",
+                            }}
+                            transition={{
+                              type: "spring",
+                              bounce: 0.2,
+                              duration: 0.6,
+                            }}
+                          />
+                        )}
+                      </AnimatePresence>
+                    </Button>
+                  </Box>
+                );
+              })}
+            </Box>
+          </Toolbar>
+        </Container>
+      </AppBar>
+
+      {/* Mobile Navigation Drawer */}
+      <Drawer
+        anchor="left"
+        open={mobileMenuOpen}
+        onClose={handleCloseMobileMenu}
+        sx={{
+          display: { xs: "block", md: "none" },
+          "& .MuiDrawer-paper": {
+            width: 280,
+            background: "linear-gradient(135deg, rgba(17, 20, 28, 0.95), rgba(30, 30, 40, 0.95))",
+            backdropFilter: "blur(20px) saturate(150%)",
+            WebkitBackdropFilter: "blur(20px) saturate(150%)",
+            borderRight: "1px solid rgba(255, 255, 255, 0.08)",
+            color: "#fff",
+          },
+        }}
+      >
+        <Box sx={{ p: 3 }}>
+          {/* Mobile drawer header */}
           <Box
             sx={{
-              flexGrow: "1",
-              display: { xs: "none", md: "flex" },
-              gap: "10px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              mb: 3,
+              pb: 2,
+              borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
             }}
           >
-            {pages.map(({ label, path }) => {
+            <Typography
+              variant="h6"
+              sx={{
+                fontFamily: "var(--font-oswald)",
+                fontWeight: 700,
+                letterSpacing: ".1rem",
+                background: "var(--gradient-accent)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+              }}
+            >
+              TALHA
+            </Typography>
+            <IconButton
+              onClick={handleCloseMobileMenu}
+              sx={{
+                color: "rgba(255, 255, 255, 0.7)",
+                "&:hover": {
+                  color: "#fff",
+                  backgroundColor: "rgba(255, 255, 255, 0.08)",
+                },
+              }}
+            >
+              <CloseIcon />
+            </IconButton>
+          </Box>
+
+          {/* Mobile navigation items */}
+          <List sx={{ p: 0 }}>
+            {pages.map(({ label, path }, index) => {
               const active = pathname === path;
               return (
-                <Box key={path} sx={{ position: "relative" }}>
-                  <Button
+                <ListItem key={path} disablePadding sx={{ mb: 1 }}>
+                  <ListItemButton
                     component={Link}
                     href={path}
+                    onClick={handleCloseMobileMenu}
                     sx={{
-                      display: "block",
-                      color: active ? "#fff" : "rgba(255 255 255 / .75)",
-                      fontWeight: 500,
+                      borderRadius: 2,
+                      py: 1.5,
+                      px: 2,
                       position: "relative",
-                      letterSpacing: ".5px",
-                      textTransform: "none",
-                      fontSize: "15px",
-                      paddingInline: "18px",
-                      transition: "color .4s ease",
-                      '&:hover': { color: '#fff' }
+                      overflow: "hidden",
+                      background: active
+                        ? "linear-gradient(90deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.15))"
+                        : "transparent",
+                      color: active ? "#fff" : "rgba(255, 255, 255, 0.8)",
+                      fontWeight: active ? 600 : 500,
+                      transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                      "&:hover": {
+                        backgroundColor: active
+                          ? "linear-gradient(90deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2))"
+                          : "rgba(255, 255, 255, 0.05)",
+                        color: "#fff",
+                        transform: "translateX(8px)",
+                      },
+                      "&::before": {
+                        content: '""',
+                        position: "absolute",
+                        left: 0,
+                        top: 0,
+                        bottom: 0,
+                        width: active ? 3 : 0,
+                        background: "linear-gradient(180deg, #6366f1, #8b5cf6)",
+                        transition: "width 0.3s ease",
+                      },
                     }}
                   >
-                    {label}
-                    {active && (
-                      <motion.span
-                        layoutId="nav-underline"
-                        style={{
-                          position: "absolute",
-                          left: 12,
-                          right: 12,
-                          bottom: 6,
-                          height: 3,
-                          borderRadius: 6,
-                          background: "linear-gradient(90deg,#6366f1,#ec4899,#f59e0b)",
-                        }}
-                        transition={{ type: 'spring', bounce: 0.35, duration: 0.65 }}
-                      />
-                    )}
-                  </Button>
-                </Box>
+                    <ListItemText
+                      primary={
+                        <motion.span
+                          initial={{ x: -20, opacity: 0 }}
+                          animate={{ x: 0, opacity: 1 }}
+                          transition={{ delay: index * 0.1 }}
+                          style={{
+                            fontSize: "1rem",
+                            letterSpacing: ".5px",
+                          }}
+                        >
+                          {label}
+                        </motion.span>
+                      }
+                    />
+                  </ListItemButton>
+                </ListItem>
               );
             })}
-          </Box>
-        </Toolbar>
-      </Container>
-    </AppBar>
+          </List>
+        </Box>
+      </Drawer>
+    </>
   );
 }
+
 export default Header;

@@ -7,9 +7,9 @@ import { motion } from "framer-motion";
 
 export const EducationSection = () => {
   return (
-    <Box sx={{ width:'100%', py:{ xs:8, md:10 } }}>
+  <Box sx={{ width:'100%', py:{ xs:6, md:8 } }}>
       <Container maxWidth="xl">
-        <Box sx={{ mb:6 }}>
+  <Box sx={{ mb:5 }}>
           <Typography component={motion.h2} initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:.85 }}
             sx={{ fontSize:{ xs:'2.2rem', md:'2.8rem'}, fontWeight:600, letterSpacing:'-.5px' }}>
             <span className="text-gradient">Education</span> & Learning

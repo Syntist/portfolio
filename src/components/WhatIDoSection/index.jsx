@@ -18,7 +18,7 @@ export const WhatIDoSection = () => {
     'Integration of third party platforms (Firebase / AWS / Digital Ocean)',
   ];
   return (
-    <Box sx={{ width:'100%', py:{ xs:8, md:10 } }}>
+  <Box sx={{ width:'100%', py:{ xs:6, md:8 } }}>
       <Container maxWidth="xl">
         <Grid container spacing={6}>
           <Grid item xs={12} md={6}>
@@ -30,7 +30,7 @@ export const WhatIDoSection = () => {
           </Grid>
           <Grid item xs={12} md={6} sx={{ display:'flex' }}>
             <Box sx={{ my:'auto', width:'100%' }}>
-              <Box sx={{ mb:5 }}>
+              <Box sx={{ mb:4 }}>
                 <Typography component={motion.h2} initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:.85 }}
                   sx={{ fontSize:{ xs:'2.2rem', md:'2.8rem'}, fontWeight:600, letterSpacing:'-.5px', mb:1 }}>
                   <span className='text-gradient'>What I Do</span>

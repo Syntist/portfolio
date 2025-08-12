@@ -9,7 +9,7 @@ import OpenAI from "openai";
 
 let Chatbot = db.collection("chatbot");
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_CHAT_API);
-const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
 const openai = new OpenAI({
   baseURL: "https://openrouter.ai/api/v1",
@@ -27,6 +27,8 @@ export async function chatbot(contents, history, id) {
   } else {
     context = await getContext(id);
   }
+
+  console.log("context ", context)
 
   const encoder = new TextEncoder();
   const readableStream = new ReadableStream({
@@ -68,8 +70,8 @@ export async function testChatBot(contents, history, id) {
     context = personalContext;
   } else {
     context = await getContext(id);
-  }
 
+  }
   const encoder = new TextEncoder();
   const readableStream = new ReadableStream({
     async start(controller) {
@@ -121,9 +123,26 @@ export async function testChatBot(contents, history, id) {
 
 export async function contextSession(id, github) {
   try {
+    const oldContext = await getContext(id)
+
+    if (oldContext) {
+      // Fire and forget the update context asynchronously
+      retrieveGitHubRepoInfo(github).then(newContext => {
+        Chatbot.updateOne(
+          { _id: new ObjectId(id) },
+          { $set: { context: newContext } },
+          { upsert: true }
+        ).catch(console.error); // catch errors here so they don't go unhandled
+      });
+
+      // Immediately return the id
+      return id;
+    }
+
+    // If no context exists, wait for it, update, then return id
     const context = await retrieveGitHubRepoInfo(github);
 
-    const session = await Chatbot.updateOne(
+    await Chatbot.updateOne(
       { _id: new ObjectId(id) },
       { $set: { context: context } },
       { upsert: true }
@@ -137,6 +156,7 @@ export async function contextSession(id, github) {
 
 export async function getContext(id) {
   try {
+
     const data = await Chatbot.findOne({ _id: new ObjectId(id) });
 
     return data.context;

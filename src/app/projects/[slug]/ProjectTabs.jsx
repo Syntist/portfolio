@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Tabs, Tab, Box } from "@mui/material";
+import { Tabs, Tab, Box, CircularProgress } from "@mui/material";
 import dynamic from "next/dynamic";
 import "@uiw/react-markdown-preview/markdown.css";
 import { ProjectInfo } from "@/components/ProjectInfo";
@@ -16,6 +16,7 @@ const MarkdownPreview = dynamic(() => import("@uiw/react-markdown-preview"), {
 export default function ProjectTabs({ project, repoData }) {
   const [readmeData, setReadmeData] = useState();
   const [selectedTab, setSelectedTab] = useState(0);
+  const [loading, setLoading] = useState(true);
   const [context, setContext] = useState("");
 
   const handleTabChange = (event, newValue) => {
@@ -25,7 +26,10 @@ export default function ProjectTabs({ project, repoData }) {
   const numTab = project.description ? 2 : 1;
 
   useEffect(() => {
-    getRepoReadme(project.github).then((res) => setReadmeData(res));
+    setLoading(true);
+    getRepoReadme(project.github)
+      .then((res) => setReadmeData(res))
+      .finally(() => setLoading(false));
   }, [project.github]);
 
   return (
@@ -54,11 +58,17 @@ export default function ProjectTabs({ project, repoData }) {
       </Tabs>
       {selectedTab < numTab && (
         <Box sx={{ mt: 2 }}>
-          <MarkdownPreview
-            source={
-              selectedTab === 0 ? project.description || readmeData : readmeData
-            }
-          />
+          {loading ? (
+            <CircularProgress />
+          ) : (
+            <MarkdownPreview
+              source={
+                selectedTab === 0
+                  ? project.description || readmeData
+                  : readmeData
+              }
+            />
+          )}
         </Box>
       )}
 

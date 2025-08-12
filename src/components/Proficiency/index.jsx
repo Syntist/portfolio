@@ -6,9 +6,9 @@ import { motion } from "framer-motion";
 
 export const Proficiency = () => {
   return (
-    <Box sx={{ width:'100%', py:{ xs:8 } }}>
+  <Box sx={{ width:'100%', py:{ xs:6 } }}>
       <Container maxWidth="xl">
-        <Box sx={{ mb:6, display:'flex', flexDirection:'column', gap:1 }}>
+  <Box sx={{ mb:5, display:'flex', flexDirection:'column', gap:1 }}>
           <Typography component={motion.h2} initial={{ opacity:0, y:18 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:.85 }}
             sx={{ fontSize:{ xs:'2.2rem', md:'2.8rem'}, fontWeight:600, letterSpacing:'-.5px' }}>
             <span className="text-gradient">Proficiency</span> & Focus

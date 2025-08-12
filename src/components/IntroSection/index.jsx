@@ -17,7 +17,7 @@ const itemVariants = {
 
 function IntroSection() {
   return (
-    <Box sx={{ position:'relative', width:'100%', overflow:'hidden', pt:{ xs:10, md:14}, pb:{ xs:10, md:16} }}>
+    <Box sx={{ position:'relative', width:'100%', overflow:'hidden', pt:{ xs:8, md:10}, pb:{ xs:8, md:10} }}>
       {/* Decorative background layers */}
       <Box aria-hidden="true" sx={{ position:'absolute', inset:0, overflow:'hidden', zIndex:0 }}>
         <Image src={'/background.webp'} alt="background" fill priority style={{ objectFit:'cover', filter:'brightness(.55) saturate(1.1)' }} />
@@ -40,7 +40,7 @@ function IntroSection() {
           <motion.p variants={itemVariants} style={{ fontSize:'clamp(1.05rem,1.5vw,1.25rem)', lineHeight:1.6, maxWidth:760, margin:'0 auto 2.2rem', color:'rgba(255 255 255 / .78)', fontWeight:400 }}>
             I am <strong style={{ color:'#fff' }}>Syed Talha Khalid</strong>, a passionate software engineer focused on building high-impact products across the stack – from resilient APIs and data-driven backends to immersive, accessible user interfaces.
           </motion.p>
-          <motion.div variants={itemVariants} style={{ display:'flex', justifyContent:'center', gap:'1rem', flexWrap:'wrap', marginBottom:'2.8rem' }}>
+          <motion.div variants={itemVariants} style={{ display:'flex', justifyContent:'center', gap:'1rem', flexWrap:'wrap', marginBottom:'2rem' }}>
             <Button component={Link} href="#projects" size="large" sx={{
               position:'relative',
               fontWeight:600,
