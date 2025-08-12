@@ -6,7 +6,7 @@ import ReactMarkdown from "react-markdown";
 import { motion } from "framer-motion";
 import { PaperAirplaneIcon } from "@heroicons/react/24/solid";
 
-export default function ChatStream({ context }) {
+export default function ChatStream({ context, isProjectMode = false }) {
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState([]);
   const [openai, setOpenai] = useState(false);
@@ -80,7 +80,7 @@ export default function ChatStream({ context }) {
   };
 
   return (
-    <div className="flex flex-col bg-[rgb(var(--color-bg))] text-slate-100/95 h-[calc(100vh-56px)] md:h-[calc(100vh-64px)]">
+    <div className={`flex flex-col bg-[rgb(var(--color-bg))] text-slate-100/95 h-full`}>
       <div className="flex-1 overflow-y-auto px-4 md:px-8 py-6 flex flex-col">
         <div className="w-full max-w-5xl mx-auto flex flex-col gap-5">
           <div className="flex justify-start">

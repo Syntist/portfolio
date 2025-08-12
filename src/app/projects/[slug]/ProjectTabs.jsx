@@ -57,7 +57,7 @@ export default function ProjectTabs({ project, repoData }) {
         <Tab label="Interactive Mode" />
       </Tabs>
       {selectedTab < numTab && (
-        <Box sx={{ mt: 2 }}>
+        <Box sx={{ mt: 2, mb: 2 }}>
           {loading ? (
             <CircularProgress />
           ) : (

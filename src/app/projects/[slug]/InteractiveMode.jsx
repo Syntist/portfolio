@@ -1,6 +1,6 @@
 import ChatStream from "@/app/assistant/chat";
 import { contextSession } from "@/server-action/chatbot";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, Box } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
 export default function InteractiveMode({ project, context, setContext }) {
@@ -15,7 +15,24 @@ export default function InteractiveMode({ project, context, setContext }) {
     }
   }, [context, project._id, project.github, setContext]);
 
+  if (loading) {
+    return (
+      <Box 
+        sx={{ 
+          display: 'flex', 
+          justifyContent: 'center', 
+          alignItems: 'center',
+          height: '200px'
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
+
   return (
-    <>{loading ? <CircularProgress /> : <ChatStream context={context} />}</>
+    <Box className="h-[calc(100vh-90px)] md:h-[calc(100vh-100px)]" >
+      <ChatStream context={context} isProjectMode={true} />
+    </Box>
   );
 }
