@@ -34,7 +34,7 @@ export default function ProjectTabs({ project, repoData }) {
 
   return (
     <Box
-      sx={{ width: "100%", margin: "0 auto 20px", padding: "0 24px", mt: 10 }}
+      sx={{ width: "100%", margin: "0 auto 20px", padding: "0 24px", mt: 5 }}
     >
       <ProjectInfo
         github={project.github}

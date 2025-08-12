@@ -137,7 +137,7 @@ function Header() {
                 fontSize: "1.1rem",
               }}
             >
-              TALHA
+              Syed Talha
             </Typography>
 
             {/* Desktop navigation */}

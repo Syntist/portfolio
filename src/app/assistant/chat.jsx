@@ -80,7 +80,7 @@ export default function ChatStream({ context }) {
   };
 
   return (
-    <div className="h-[92vh] flex flex-col bg-[rgb(var(--color-bg))] text-slate-100/95">
+    <div className="flex flex-col bg-[rgb(var(--color-bg))] text-slate-100/95 h-[calc(100vh-56px)] md:h-[calc(100vh-64px)]">
       <div className="flex-1 overflow-y-auto px-4 md:px-8 py-6 flex flex-col">
         <div className="w-full max-w-5xl mx-auto flex flex-col gap-5">
           <div className="flex justify-start">
