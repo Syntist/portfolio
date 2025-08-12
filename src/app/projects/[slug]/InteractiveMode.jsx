@@ -31,7 +31,7 @@ export default function InteractiveMode({ project, context, setContext }) {
   }
 
   return (
-    <Box className="h-[calc(100vh-90px)] md:h-[calc(100vh-100px)]" >
+    <Box className="h-[calc(100dvh-90px)] md:h-[calc(100vh-100px)]" >
       <ChatStream context={context} isProjectMode={true} />
     </Box>
   );
