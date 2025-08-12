@@ -6,8 +6,6 @@ import React, { useEffect, useState } from "react";
 export default function InteractiveMode({ project, context, setContext }) {
   const [loading, setLoading] = useState(context ? false : true);
 
-  console.log("context ", context)
-
   useEffect(() => {
     if (!context) {
       setLoading(true);

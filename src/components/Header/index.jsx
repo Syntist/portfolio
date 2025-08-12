@@ -176,32 +176,27 @@ function Header() {
                       }}
                     >
                       {label}
-                      <AnimatePresence mode="wait">
-                        {active && (
-                          <motion.span
-                            layoutId="nav-underline"
-                            initial={{ opacity: 0, scaleX: 0 }}
-                            animate={{ opacity: 1, scaleX: 1 }}
-                            exit={{ opacity: 0, scaleX: 0 }}
-                            style={{
-                              position: "absolute",
-                              left: 8,
-                              right: 8,
-                              bottom: 4,
-                              height: 2,
-                              borderRadius: 4,
-                              background: "linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899)",
-                              transformOrigin: "center",
-                            }}
-                            transition={{
-                              type: "spring",
-                              bounce: 0.2,
-                              duration: 0.6,
-                            }}
-                          />
-                        )}
-                      </AnimatePresence>
                     </Button>
+                    {active && (
+                      <motion.div
+                        layoutId="nav-underline"
+                        style={{
+                          position: "absolute",
+                          left: 8,
+                          right: 8,
+                          bottom: 4,
+                          height: 2,
+                          borderRadius: 4,
+                          background: "linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899)",
+                        }}
+                        initial={false}
+                        transition={{
+                          type: "spring",
+                          stiffness: 500,
+                          damping: 30,
+                        }}
+                      />
+                    )}
                   </Box>
                 );
               })}
