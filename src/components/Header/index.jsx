@@ -245,7 +245,7 @@ function Header() {
                 backgroundClip: "text",
               }}
             >
-              TALHA
+              Syed Talha
             </Typography>
             <IconButton
               onClick={handleCloseMobileMenu}
