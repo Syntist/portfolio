@@ -22,6 +22,7 @@
     "markdown-it": "^14.1.0",
     "mongodb": "^6.5.0",
     "next": "^15.0.3",
+  "framer-motion": "^11.3.24",
     "openai": "^4.83.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

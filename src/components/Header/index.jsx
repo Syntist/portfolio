@@ -14,6 +14,7 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 const pages = [
   { label: "Home", path: "/" },
@@ -24,6 +25,14 @@ const pages = [
 function Header() {
   const pathname = usePathname();
   const [anchorElNav, setAnchorElNav] = React.useState();
+  const [scrolled, setScrolled] = React.useState(false);
+
+  React.useEffect(() => {
+    const handler = () => setScrolled(window.scrollY > 16);
+    handler();
+    window.addEventListener("scroll", handler, { passive: true });
+    return () => window.removeEventListener("scroll", handler);
+  }, []);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -35,16 +44,17 @@ function Header() {
 
   return (
     <AppBar
-      position="static"
+      position="sticky"
+      elevation={0}
       sx={{
-        backgroundColor: "rgba(31, 31, 31, 0.7)",
-        position: "absolute",
-        left: "0",
-        top: "0",
-        width: "100%",
-        zIndex: "9",
-        boxShadow: "none",
-        border: "0",
+        top: 0,
+        background: scrolled
+          ? "rgba(17, 20, 28, 0.72)"
+          : "linear-gradient(to bottom, rgba(17,20,28,.85), rgba(17,20,28,.25) 70%, rgba(17,20,28,0))",
+        backdropFilter: "blur(18px) saturate(140%)",
+        WebkitBackdropFilter: "blur(18px) saturate(140%)",
+        borderBottom: scrolled ? "1px solid rgba(255 255 255 / .08)" : "1px solid transparent",
+        transition: "all .5s ease",
         color: "#fff",
       }}
     >
@@ -54,19 +64,22 @@ function Header() {
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
+            component={Link}
+            href="/"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
+              fontFamily: "var(--font-oswald)",
+              fontWeight: 600,
+              letterSpacing: ".15rem",
               color: "inherit",
               textDecoration: "none",
+              background: "var(--gradient-accent)",
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
             }}
           >
-            Talha
+            TALHA
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -117,20 +130,23 @@ function Header() {
           <Typography
             variant="h5"
             noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
+            component={Link}
+            href="/"
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
+              fontFamily: "var(--font-oswald)",
+              fontWeight: 600,
+              letterSpacing: ".2rem",
               color: "inherit",
               textDecoration: "none",
+              background: "var(--gradient-accent)",
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
             }}
           >
-            Talha
+            TALHA
           </Typography>
           <Box
             sx={{
@@ -139,25 +155,46 @@ function Header() {
               gap: "10px",
             }}
           >
-            {pages.map(({ label, path }) => (
-              <Link key={path} href={path}>
-                <Button
-                  className={(pathname === path && "active") || ""}
-                  sx={{
-                    display: "block",
-                    color: "#fff",
-                    fontWeight: "600",
-
-                    "&:hover, &.active": {
-                      color: "#000",
-                      backgroundColor: "#fff",
-                    },
-                  }}
-                >
-                  {label}
-                </Button>
-              </Link>
-            ))}
+            {pages.map(({ label, path }) => {
+              const active = pathname === path;
+              return (
+                <Box key={path} sx={{ position: "relative" }}>
+                  <Button
+                    component={Link}
+                    href={path}
+                    sx={{
+                      display: "block",
+                      color: active ? "#fff" : "rgba(255 255 255 / .75)",
+                      fontWeight: 500,
+                      position: "relative",
+                      letterSpacing: ".5px",
+                      textTransform: "none",
+                      fontSize: "15px",
+                      paddingInline: "18px",
+                      transition: "color .4s ease",
+                      '&:hover': { color: '#fff' }
+                    }}
+                  >
+                    {label}
+                    {active && (
+                      <motion.span
+                        layoutId="nav-underline"
+                        style={{
+                          position: "absolute",
+                          left: 12,
+                          right: 12,
+                          bottom: 6,
+                          height: 3,
+                          borderRadius: 6,
+                          background: "linear-gradient(90deg,#6366f1,#ec4899,#f59e0b)",
+                        }}
+                        transition={{ type: 'spring', bounce: 0.35, duration: 0.65 }}
+                      />
+                    )}
+                  </Button>
+                </Box>
+              );
+            })}
           </Box>
         </Toolbar>
       </Container>
