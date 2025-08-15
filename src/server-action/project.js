@@ -55,21 +55,13 @@ export const updateProject = async (formData) => {
 export const getProjects = async () => {
   const projects = await Projects.find({}).toArray();
 
-  const plainProjects = projects.map((project) => {
-    const plainProject = { ...project };
-
-    plainProject._id = project?._id?.toString();
-
-    return plainProject;
-  });
-
-  return plainProjects;
+  return projects;
 };
 
 export const getProject = async (handler) => {
   const project = await Projects.findOne({ handler: handler });
 
-  return { ...project, _id: project?._id?.toJSON() };
+  return { ...project, _id: project?._id };
 };
 
 export const deleteProject = async (id) => {

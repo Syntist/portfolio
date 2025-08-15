@@ -26,7 +26,11 @@ export const DeleteProject = ({ id }) => {
     <IconButton
       color="error"
       disabled={loading}
-      onClick={() => projectDeletion(id)}
+      onClick={(e) => {
+        e.stopPropagation(); // Prevent parent Link navigation
+        e.preventDefault();
+        projectDeletion(id);
+      }}
     >
       <DeleteIcon />
     </IconButton>

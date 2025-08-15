@@ -68,7 +68,7 @@ export const ProjectForm = ({ data }) => {
   return (
     <Box mt={10}>
       <Box
-        sx={{ width: "100%", margin: "0 auto 20px", padding: "0 24px", mt: 10 }}
+        sx={{ width: "100%", margin: "0 auto 20px", padding: "0 24px", mt: 10, color: "white" }}
       >
         <Typography variant="h5" mb={2}>
           {data ? "Edit Project" : "Create a New Project"}

@@ -5,7 +5,6 @@ import ProjectTabs from "./ProjectTabs";
 
 export default async function ProjectPage({ params }) {
   const { slug } = await params;
-
   const project = await getProject(slug);
 
   return (
