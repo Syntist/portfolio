@@ -3,7 +3,6 @@
 import baseApi from "@/baseApi";
 
 export const getRepoData = async (url) => {
-  console.log(url)
   const link = url?.split("://")[1].split('/')
 
   try {

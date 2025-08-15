@@ -60,10 +60,10 @@ export const ProjectInfo = ({ id, url, handler, github }) => {
                   </Link>
                 )}
               </Typography>
-              <Box>
+              {/* <Box>
                 <EditButton handler={handler} />
                 <DeleteProject id={id} />
-              </Box>
+              </Box> */}
             </Box>
             {project?.description && (
               <Typography

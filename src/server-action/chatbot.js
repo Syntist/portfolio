@@ -6,6 +6,8 @@ import { retrieveGitHubRepoInfo } from "@/utils/utils";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { ObjectId } from "mongodb";
 import OpenAI from "openai";
+import { getRepoReadme } from "./github";
+import { getProject } from "./project";
 
 let Chatbot = db.collection("chatbot");
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_CHAT_API);
@@ -20,7 +22,7 @@ const openai = new OpenAI({
   },
 });
 
-export async function chatbot(contents, history, id) {
+export async function chatbot(contents, history, id, summary = false) {
   let context;
   if (id === "self") {
     context = personalContext;
@@ -28,7 +30,11 @@ export async function chatbot(contents, history, id) {
     context = await getContext(id);
   }
 
-  console.log("context ", context)
+  if (summary) {
+    const project = await getProject(id);
+    const readme = await getRepoReadme(project.github);
+    context = `Summarize the following content in a concise manner, focusing on key points and main ideas:\n\n${context} and ${readme}`;
+  }
 
   const encoder = new TextEncoder();
   const readableStream = new ReadableStream({
@@ -70,7 +76,6 @@ export async function testChatBot(contents, history, id) {
     context = personalContext;
   } else {
     context = await getContext(id);
-
   }
   const encoder = new TextEncoder();
   const readableStream = new ReadableStream({
@@ -123,11 +128,13 @@ export async function testChatBot(contents, history, id) {
 
 export async function contextSession(id, github) {
   try {
-    const oldContext = await getContext(id)
+    const oldContext = await getContext(id);
+
+    console.log(oldContext);
 
     if (oldContext) {
       // Fire and forget the update context asynchronously
-      retrieveGitHubRepoInfo(github).then(newContext => {
+      retrieveGitHubRepoInfo(github).then((newContext) => {
         Chatbot.updateOne(
           { _id: new ObjectId(id) },
           { $set: { context: newContext } },
@@ -156,7 +163,6 @@ export async function contextSession(id, github) {
 
 export async function getContext(id) {
   try {
-
     const data = await Chatbot.findOne({ _id: new ObjectId(id) });
 
     return data.context;
@@ -164,3 +170,72 @@ export async function getContext(id) {
     return e;
   }
 }
+
+export async function getSummary(id) {
+  try {
+    const data = await Chatbot.findOne({ _id: new ObjectId(id) });
+
+    return data?.summary;
+  } catch (e) {
+    return e;
+  }
+}
+
+export const getProjectSummary = async (handler) => {
+  const project = await getProject(handler);
+  const data = await Chatbot.findOne({ _id: new ObjectId(project._id) });
+
+  const oldSummary = data?.summary;
+
+  if (!project) return null;
+
+  if (oldSummary) {
+    return { ...project, _id: project?._id, summary: oldSummary };
+  }
+
+  const id = await contextSession(project._id, project.github);
+
+  const chatStream = await chatbot(
+    "Give me indepth summary of this project",
+    [],
+    id,
+    true
+  );
+
+  // Convert stream -> text
+  const summary = await new Response(chatStream).text();
+
+  Chatbot.updateOne(
+    { _id: new ObjectId(id) },
+    { $set: { summary: summary } },
+    { upsert: true }
+  ).catch(console.error);
+
+  return { ...project, _id: project?._id, summary };
+};
+
+export const refreshSummary = async (handler) => {
+  const project = await getProject(handler);
+
+  if (!project) return null;
+
+  const id = await contextSession(project._id, project.github);
+
+  const chatStream = await chatbot(
+    "Give me indepth summary of this project",
+    [],
+    id,
+    true
+  );
+
+  // Convert stream -> text
+  const summary = await new Response(chatStream).text();
+
+  Chatbot.updateOne(
+    { _id: new ObjectId(id) },
+    { $set: { summary: summary } },
+    { upsert: true }
+  ).catch(console.error);
+
+  return { ...project, _id: project?._id, summary };
+};

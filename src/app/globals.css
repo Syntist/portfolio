@@ -87,9 +87,10 @@ body::before{
 .MuiTab-textColorPrimary {
   color: white;
 }
-.MuiCircularProgress-colorPrimary {
-  margin: 40px auto;
+.MuiCircularProgress-root {
   display: block;
+  margin: 40px auto;
+  color: #fff; /* sets the spinner color */
 }
 .project-link { position: relative; display:block; width:100%; transform:translateZ(0); transition:all .45s cubic-bezier(.16,.8,.42,1); }
 .project-link:focus-visible { outline:2px solid #6366f1; outline-offset:4px; border-radius:var(--radius); }

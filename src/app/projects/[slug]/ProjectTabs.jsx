@@ -6,7 +6,8 @@ import dynamic from "next/dynamic";
 import "@uiw/react-markdown-preview/markdown.css";
 import { ProjectInfo } from "@/components/ProjectInfo";
 import InteractiveMode from "./InteractiveMode";
-import { getRepoData, getRepoReadme } from "@/server-action/github";
+import { getRepoReadme } from "@/server-action/github";
+import { Summary } from "./Summary";
 
 // Dynamically import MarkdownPreview to avoid SSR issues
 const MarkdownPreview = dynamic(() => import("@uiw/react-markdown-preview"), {
@@ -18,12 +19,13 @@ export default function ProjectTabs({ project, repoData }) {
   const [selectedTab, setSelectedTab] = useState(0);
   const [loading, setLoading] = useState(true);
   const [context, setContext] = useState("");
+  const [summary, setSummary] = useState("");
 
   const handleTabChange = (event, newValue) => {
     setSelectedTab(newValue);
   };
 
-  const numTab = project.description ? 2 : 1;
+  const numTab = project.description ? 3 : 2;
 
   useEffect(() => {
     setLoading(true);
@@ -52,11 +54,23 @@ export default function ProjectTabs({ project, repoData }) {
         indicatorColor="primary"
         sx={{ mb: 2 }}
       >
+        <Tab label="Summary" />
         {project.description && <Tab label="Description" />}
         <Tab label="GitHub README" />
         <Tab label="Interactive Mode" />
       </Tabs>
-      {selectedTab < numTab && (
+
+      {selectedTab === 0 && (
+        <Summary summary={summary} setSummary={setSummary} />
+      )}
+
+      {selectedTab === numTab - 2 && project.description && (
+        <Box sx={{ mt: 2, mb: 2 }}>
+          <MarkdownPreview source={project.description} />
+        </Box>
+      )}
+
+      {selectedTab === numTab - 1 && (
         <Box sx={{ mt: 2, mb: 2 }}>
           {loading ? (
             <CircularProgress />
