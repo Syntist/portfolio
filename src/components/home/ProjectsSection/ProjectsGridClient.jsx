@@ -1,7 +1,7 @@
 "use client";
+import { ProjectCard } from "@/components/projects/ProjectCard";
 import { Box, Grid, Typography } from "@mui/material";
 import { motion } from "framer-motion";
-import { ProjectCard } from "@/app/projects/ProjectCard";
 
 export function ProjectsGridClient({ projects }) {
   return (

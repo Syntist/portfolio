@@ -3,8 +3,6 @@
 import db from "@/db/conn";
 import { ObjectId } from "mongodb";
 import { revalidatePath } from "next/cache";
-import { getRepoReadme } from "./github";
-import { Chatbot, chatbot, contextSession, getSummary } from "./chatbot";
 
 let Projects = db.collection("projects");
 Projects.createIndex({ github: 1, url: 1, title: 1 }, { unique: true });

@@ -1,5 +1,5 @@
+import { ProjectCard } from "@/components/projects/ProjectCard";
 import { getProjects } from "@/server-action/project";
-import { ProjectCard } from "./ProjectCard";
 import { Box } from "@mui/material";
 import { Suspense } from "react";
 

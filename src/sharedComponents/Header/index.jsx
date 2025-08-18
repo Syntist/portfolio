@@ -18,7 +18,13 @@ import Button from "@mui/material/Button";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import Login from "../Login";
+import { useSession, signIn, signOut } from "next-auth/react";
+import Avatar from "@mui/material/Avatar";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import LogoutIcon from "@mui/icons-material/Logout";
+import PersonIcon from "@mui/icons-material/Person";
 
 const pages = [
   { label: "Home", path: "/" },
@@ -30,7 +36,9 @@ function Header() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const [scrolled, setScrolled] = React.useState(false);
-
+  const [userMenuAnchor, setUserMenuAnchor] = React.useState(null);
+  const { data: session } = useSession();
+  
   React.useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 16);
     handler();
@@ -44,6 +52,19 @@ function Header() {
 
   const handleCloseMobileMenu = () => {
     setMobileMenuOpen(false);
+  };
+
+  const handleUserMenuClick = (event) => {
+    setUserMenuAnchor(event.currentTarget);
+  };
+
+  const handleUserMenuClose = () => {
+    setUserMenuAnchor(null);
+  };
+
+  const handleSignOut = () => {
+    handleUserMenuClose();
+    signOut();
   };
 
   return (
@@ -202,10 +223,112 @@ function Header() {
                 );
               })}
             </Box>
+
+            {/* Authentication Section */}
+            <Box sx={{ ml: 2 }}>
+              {session ? (
+                <>
+                  <IconButton
+                    onClick={handleUserMenuClick}
+                    sx={{
+                      p: 0.5,
+                      transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                      "&:hover": {
+                        transform: "scale(1.05)",
+                        backgroundColor: "rgba(255 255 255 / 0.08)",
+                      },
+                    }}
+                  >
+                    <Avatar
+                      src={session.user?.image}
+                      alt={session.user?.name}
+                      sx={{
+                        width: 36,
+                        height: 36,
+                        border: "2px solid rgba(255 255 255 / 0.1)",
+                        background: session.user?.image 
+                          ? "transparent" 
+                          : "linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899)",
+                      }}
+                    >
+                      {!session.user?.image && <PersonIcon />}
+                    </Avatar>
+                  </IconButton>
+                  <Menu
+                    anchorEl={userMenuAnchor}
+                    open={Boolean(userMenuAnchor)}
+                    onClose={handleUserMenuClose}
+                    transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                    anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                    sx={{
+                      mt: 1,
+                      "& .MuiPaper-root": {
+                        background: "linear-gradient(135deg, rgba(17, 20, 28, 0.95), rgba(30, 30, 40, 0.95))",
+                        backdropFilter: "blur(20px) saturate(150%)",
+                        WebkitBackdropFilter: "blur(20px) saturate(150%)",
+                        border: "1px solid rgba(255, 255, 255, 0.08)",
+                        borderRadius: 2,
+                        color: "#fff",
+                        minWidth: 200,
+                      },
+                    }}
+                  >
+                    <Box sx={{ px: 2, py: 1.5, borderBottom: "1px solid rgba(255, 255, 255, 0.08)" }}>
+                      <Typography variant="body2" sx={{ color: "rgba(255, 255, 255, 0.7)" }}>
+                        Signed in as
+                      </Typography>
+                      <Typography variant="body1" sx={{ fontWeight: 600, color: "#fff" }}>
+                        {session.user?.name || session.user?.email}
+                      </Typography>
+                    </Box>
+                    <MenuItem
+                      onClick={handleSignOut}
+                      sx={{
+                        py: 1.5,
+                        px: 2,
+                        "&:hover": {
+                          backgroundColor: "rgba(255, 255, 255, 0.05)",
+                        },
+                      }}
+                    >
+                      <LogoutIcon sx={{ mr: 1.5, fontSize: 20 }} />
+                      Sign out
+                    </MenuItem>
+                  </Menu>
+                </>
+              ) : (
+                <Button
+                  onClick={() => signIn("github")}
+                  startIcon={<GitHubIcon />}
+                  sx={{
+                    color: "#fff",
+                    borderColor: "rgba(255, 255, 255, 0.2)",
+                    background: "rgba(255, 255, 255, 0.05)",
+                    backdropFilter: "blur(10px)",
+                    WebkitBackdropFilter: "blur(10px)",
+                    textTransform: "none",
+                    fontSize: "14px",
+                    fontWeight: 500,
+                    px: 2.5,
+                    py: 1,
+                    borderRadius: 2,
+                    border: "1px solid rgba(255, 255, 255, 0.1)",
+                    transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                    "&:hover": {
+                      background: "linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2))",
+                      borderColor: "rgba(99, 102, 241, 0.4)",
+                      transform: "translateY(-1px)",
+                      boxShadow: "0 4px 20px rgba(99, 102, 241, 0.25)",
+                    },
+                  }}
+                >
+                  Sign in
+                </Button>
+              )}
+            </Box>
           </Toolbar>
         </Container>
       </AppBar>
-      <Login />
 
       {/* Mobile Navigation Drawer */}
       <Drawer
@@ -325,6 +448,93 @@ function Header() {
               );
             })}
           </List>
+
+          {/* Mobile Authentication Section */}
+          <Box sx={{ mt: 3, pt: 3, borderTop: "1px solid rgba(255, 255, 255, 0.08)" }}>
+            {session ? (
+              <Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 2,
+                    p: 2,
+                    borderRadius: 2,
+                    background: "linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1))",
+                    border: "1px solid rgba(99, 102, 241, 0.2)",
+                    mb: 2,
+                  }}
+                >
+                  <Avatar
+                    src={session.user?.image}
+                    alt={session.user?.name}
+                    sx={{
+                      width: 40,
+                      height: 40,
+                      border: "2px solid rgba(255 255 255 / 0.1)",
+                      background: session.user?.image 
+                        ? "transparent" 
+                        : "linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899)",
+                    }}
+                  >
+                    {!session.user?.image && <PersonIcon />}
+                  </Avatar>
+                  <Box sx={{ flex: 1 }}>
+                    <Typography variant="body2" sx={{ color: "rgba(255, 255, 255, 0.7)" }}>
+                      Signed in as
+                    </Typography>
+                    <Typography variant="body1" sx={{ fontWeight: 600, color: "#fff" }}>
+                      {session.user?.name || session.user?.email}
+                    </Typography>
+                  </Box>
+                </Box>
+                <Button
+                  onClick={() => {
+                    handleCloseMobileMenu();
+                    signOut();
+                  }}
+                  startIcon={<LogoutIcon />}
+                  fullWidth
+                  sx={{
+                    color: "#fff",
+                    background: "rgba(255, 255, 255, 0.05)",
+                    textTransform: "none",
+                    py: 1.5,
+                    borderRadius: 2,
+                    border: "1px solid rgba(255, 255, 255, 0.1)",
+                    "&:hover": {
+                      background: "rgba(255, 255, 255, 0.1)",
+                    },
+                  }}
+                >
+                  Sign out
+                </Button>
+              </Box>
+            ) : (
+              <Button
+                onClick={() => {
+                  handleCloseMobileMenu();
+                  signIn("github");
+                }}
+                startIcon={<GitHubIcon />}
+                fullWidth
+                sx={{
+                  color: "#fff",
+                  background: "linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.15))",
+                  textTransform: "none",
+                  py: 1.5,
+                  borderRadius: 2,
+                  border: "1px solid rgba(99, 102, 241, 0.3)",
+                  "&:hover": {
+                    background: "linear-gradient(135deg, rgba(99, 102, 241, 0.25), rgba(139, 92, 246, 0.25))",
+                    transform: "translateY(-1px)",
+                  },
+                }}
+              >
+                Sign in with GitHub
+              </Button>
+            )}
+          </Box>
         </Box>
       </Drawer>
     </>

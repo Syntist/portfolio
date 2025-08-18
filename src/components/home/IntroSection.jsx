@@ -15,7 +15,7 @@ const itemVariants = {
   show: { opacity: 1, y: 0, transition: { duration: .8, ease: [0.16,0.8,0.42,1] } }
 };
 
-function IntroSection() {
+export const IntroSection = () => {
   return (
     <Box sx={{ position:'relative', width:'100%', overflow:'hidden', pt:{ xs:8, md:10}, pb:{ xs:8, md:10} }}>
       {/* Decorative background layers */}
@@ -93,4 +93,3 @@ function IntroSection() {
     </Box>
   );
 }
-export default IntroSection;

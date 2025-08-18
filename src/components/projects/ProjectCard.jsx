@@ -1,6 +1,6 @@
+import { ProjectInfo } from "@/sharedComponents/ProjectInfo";
 import { Card } from "@mui/material";
 import Link from "next/link";
-import { ProjectInfo } from "@/components/ProjectInfo";
 
 export const ProjectCard = async ({ project }) => {
 

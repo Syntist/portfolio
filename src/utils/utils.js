@@ -1,6 +1,6 @@
 "use server";
 
-const { default: axios } = require("axios");
+import axios from "axios";
 
 /**
  * Parses the GitHub URL and extracts the repository owner and name.
