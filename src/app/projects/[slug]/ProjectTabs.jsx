@@ -4,10 +4,10 @@ import React, { useEffect, useState } from "react";
 import { Tabs, Tab, Box, CircularProgress } from "@mui/material";
 import dynamic from "next/dynamic";
 import "@uiw/react-markdown-preview/markdown.css";
-import { ProjectInfo } from "@/components/ProjectInfo";
 import InteractiveMode from "./InteractiveMode";
 import { getRepoReadme } from "@/server-action/github";
 import { Summary } from "./Summary";
+import { ProjectInfo } from "@/sharedComponents/ProjectInfo";
 
 // Dynamically import MarkdownPreview to avoid SSR issues
 const MarkdownPreview = dynamic(() => import("@uiw/react-markdown-preview"), {

@@ -12,8 +12,6 @@ import { useAuth } from "@/hooks/useAuth";
 
 export const ProjectInfo = ({ id, url, handler, github }) => {
   const { isAdmin } = useAuth();
-
-  console.log(isAdmin);
   const [project, setProject] = useState();
 
   useEffect(() => {

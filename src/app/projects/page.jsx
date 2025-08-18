@@ -1,24 +1,26 @@
 import { ProjectCard } from "@/components/projects/ProjectCard";
 import { getProjects } from "@/server-action/project";
-import { Box } from "@mui/material";
+import { Box, Typography, Button, Container } from "@mui/material";
 import { Suspense } from "react";
+import AddIcon from "@mui/icons-material/Add";
+import Link from "next/link";
+import { ProjectsPageHeader } from "./ProjectsPageHeader";
 
 export default async function Projects() {
   const projects = await getProjects();
 
   return (
     <Box>
-      <Box
-        sx={{ width: "100%", margin: "0 auto 20px", padding: "0 24px", mt: 5 }}
-      >
+      <ProjectsPageHeader />
+      <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 3, md: 4 }, marginTop: 5 }}>
         <Suspense>
           {projects.map((project) => (
-            <Box key={project?._id.toString()} mt={2}>
+            <Box key={project?._id.toString()} mb={3}>
               <ProjectCard project={project} />
             </Box>
           ))}
         </Suspense>
-      </Box>
+      </Container>
     </Box>
   );
 }

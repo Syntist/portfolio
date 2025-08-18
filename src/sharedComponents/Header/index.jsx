@@ -15,7 +15,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSession, signIn, signOut } from "next-auth/react";
@@ -38,7 +38,8 @@ function Header() {
   const [scrolled, setScrolled] = React.useState(false);
   const [userMenuAnchor, setUserMenuAnchor] = React.useState(null);
   const { data: session } = useSession();
-  
+  const router = useRouter();
+
   React.useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 16);
     handler();
@@ -64,7 +65,7 @@ function Header() {
 
   const handleSignOut = () => {
     handleUserMenuClose();
-    signOut();
+    signOut({ callbackUrl: "/" });
   };
 
   return (
@@ -79,7 +80,9 @@ function Header() {
             : "linear-gradient(to bottom, rgba(17,20,28,.9), rgba(17,20,28,.3) 70%, rgba(17,20,28,0))",
           backdropFilter: "blur(20px) saturate(150%)",
           WebkitBackdropFilter: "blur(20px) saturate(150%)",
-          borderBottom: scrolled ? "1px solid rgba(255 255 255 / .1)" : "1px solid transparent",
+          borderBottom: scrolled
+            ? "1px solid rgba(255 255 255 / .1)"
+            : "1px solid transparent",
           transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
           color: "#fff",
           zIndex: 1100,
@@ -209,7 +212,8 @@ function Header() {
                           bottom: 4,
                           height: 2,
                           borderRadius: 4,
-                          background: "linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899)",
+                          background:
+                            "linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899)",
                         }}
                         initial={false}
                         transition={{
@@ -246,8 +250,8 @@ function Header() {
                         width: 36,
                         height: 36,
                         border: "2px solid rgba(255 255 255 / 0.1)",
-                        background: session.user?.image 
-                          ? "transparent" 
+                        background: session.user?.image
+                          ? "transparent"
                           : "linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899)",
                       }}
                     >
@@ -258,12 +262,13 @@ function Header() {
                     anchorEl={userMenuAnchor}
                     open={Boolean(userMenuAnchor)}
                     onClose={handleUserMenuClose}
-                    transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                    anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                    transformOrigin={{ horizontal: "right", vertical: "top" }}
+                    anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
                     sx={{
                       mt: 1,
                       "& .MuiPaper-root": {
-                        background: "linear-gradient(135deg, rgba(17, 20, 28, 0.95), rgba(30, 30, 40, 0.95))",
+                        background:
+                          "linear-gradient(135deg, rgba(17, 20, 28, 0.95), rgba(30, 30, 40, 0.95))",
                         backdropFilter: "blur(20px) saturate(150%)",
                         WebkitBackdropFilter: "blur(20px) saturate(150%)",
                         border: "1px solid rgba(255, 255, 255, 0.08)",
@@ -273,11 +278,23 @@ function Header() {
                       },
                     }}
                   >
-                    <Box sx={{ px: 2, py: 1.5, borderBottom: "1px solid rgba(255, 255, 255, 0.08)" }}>
-                      <Typography variant="body2" sx={{ color: "rgba(255, 255, 255, 0.7)" }}>
+                    <Box
+                      sx={{
+                        px: 2,
+                        py: 1.5,
+                        borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
+                      }}
+                    >
+                      <Typography
+                        variant="body2"
+                        sx={{ color: "rgba(255, 255, 255, 0.7)" }}
+                      >
                         Signed in as
                       </Typography>
-                      <Typography variant="body1" sx={{ fontWeight: 600, color: "#fff" }}>
+                      <Typography
+                        variant="body1"
+                        sx={{ fontWeight: 600, color: "#fff" }}
+                      >
                         {session.user?.name || session.user?.email}
                       </Typography>
                     </Box>
@@ -315,7 +332,8 @@ function Header() {
                     border: "1px solid rgba(255, 255, 255, 0.1)",
                     transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                     "&:hover": {
-                      background: "linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2))",
+                      background:
+                        "linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2))",
                       borderColor: "rgba(99, 102, 241, 0.4)",
                       transform: "translateY(-1px)",
                       boxShadow: "0 4px 20px rgba(99, 102, 241, 0.25)",
@@ -339,7 +357,8 @@ function Header() {
           display: { xs: "block", md: "none" },
           "& .MuiDrawer-paper": {
             width: 280,
-            background: "linear-gradient(135deg, rgba(17, 20, 28, 0.95), rgba(30, 30, 40, 0.95))",
+            background:
+              "linear-gradient(135deg, rgba(17, 20, 28, 0.95), rgba(30, 30, 40, 0.95))",
             backdropFilter: "blur(20px) saturate(150%)",
             WebkitBackdropFilter: "blur(20px) saturate(150%)",
             borderRight: "1px solid rgba(255, 255, 255, 0.08)",
@@ -385,7 +404,6 @@ function Header() {
               <CloseIcon />
             </IconButton>
           </Box>
-
 
           {/* Mobile navigation items */}
           <List sx={{ p: 0 }}>
@@ -450,7 +468,13 @@ function Header() {
           </List>
 
           {/* Mobile Authentication Section */}
-          <Box sx={{ mt: 3, pt: 3, borderTop: "1px solid rgba(255, 255, 255, 0.08)" }}>
+          <Box
+            sx={{
+              mt: 3,
+              pt: 3,
+              borderTop: "1px solid rgba(255, 255, 255, 0.08)",
+            }}
+          >
             {session ? (
               <Box>
                 <Box
@@ -460,7 +484,8 @@ function Header() {
                     gap: 2,
                     p: 2,
                     borderRadius: 2,
-                    background: "linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1))",
+                    background:
+                      "linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1))",
                     border: "1px solid rgba(99, 102, 241, 0.2)",
                     mb: 2,
                   }}
@@ -472,18 +497,24 @@ function Header() {
                       width: 40,
                       height: 40,
                       border: "2px solid rgba(255 255 255 / 0.1)",
-                      background: session.user?.image 
-                        ? "transparent" 
+                      background: session.user?.image
+                        ? "transparent"
                         : "linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899)",
                     }}
                   >
                     {!session.user?.image && <PersonIcon />}
                   </Avatar>
                   <Box sx={{ flex: 1 }}>
-                    <Typography variant="body2" sx={{ color: "rgba(255, 255, 255, 0.7)" }}>
+                    <Typography
+                      variant="body2"
+                      sx={{ color: "rgba(255, 255, 255, 0.7)" }}
+                    >
                       Signed in as
                     </Typography>
-                    <Typography variant="body1" sx={{ fontWeight: 600, color: "#fff" }}>
+                    <Typography
+                      variant="body1"
+                      sx={{ fontWeight: 600, color: "#fff" }}
+                    >
                       {session.user?.name || session.user?.email}
                     </Typography>
                   </Box>
@@ -520,13 +551,15 @@ function Header() {
                 fullWidth
                 sx={{
                   color: "#fff",
-                  background: "linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.15))",
+                  background:
+                    "linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.15))",
                   textTransform: "none",
                   py: 1.5,
                   borderRadius: 2,
                   border: "1px solid rgba(99, 102, 241, 0.3)",
                   "&:hover": {
-                    background: "linear-gradient(135deg, rgba(99, 102, 241, 0.25), rgba(139, 92, 246, 0.25))",
+                    background:
+                      "linear-gradient(135deg, rgba(99, 102, 241, 0.25), rgba(139, 92, 246, 0.25))",
                     transform: "translateY(-1px)",
                   },
                 }}
