@@ -33,8 +33,6 @@ export const Summary = ({ summary, setSummary }) => {
     }
   }, [slug, summary]);
 
-  console.log(summary)
-
   return (
     <Box sx={{ mt: 2, mb: 2, position: "relative" }}>
 

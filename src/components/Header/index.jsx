@@ -18,6 +18,7 @@ import Button from "@mui/material/Button";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import Login from "../Login";
 
 const pages = [
   { label: "Home", path: "/" },
@@ -204,6 +205,7 @@ function Header() {
           </Toolbar>
         </Container>
       </AppBar>
+      <Login />
 
       {/* Mobile Navigation Drawer */}
       <Drawer
@@ -260,6 +262,7 @@ function Header() {
               <CloseIcon />
             </IconButton>
           </Box>
+
 
           {/* Mobile navigation items */}
           <List sx={{ p: 0 }}>

@@ -130,8 +130,6 @@ export async function contextSession(id, github) {
   try {
     const oldContext = await getContext(id);
 
-    console.log(oldContext);
-
     if (oldContext) {
       // Fire and forget the update context asynchronously
       retrieveGitHubRepoInfo(github).then((newContext) => {

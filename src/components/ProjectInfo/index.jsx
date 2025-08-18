@@ -8,7 +8,6 @@ import OpenInBrowserIcon from "@mui/icons-material/OpenInBrowser";
 import { EditButton } from "../EditButton";
 import { useEffect, useState } from "react";
 import { getRepoData } from "@/server-action/github";
-import zIndex from "@mui/material/styles/zIndex";
 
 export const ProjectInfo = ({ id, url, handler, github }) => {
   const [project, setProject] = useState();
@@ -40,13 +39,13 @@ export const ProjectInfo = ({ id, url, handler, github }) => {
                   lineHeight: 1.3,
                   mb: 0,
                   wordBreak: "break-word",
-                  color: "#fff",
+                  color: '#fff',
                   fontWeight: 600,
-                  letterSpacing: ".3px",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 0.5,
-                  ".MuiSvgIcon-root": { fontSize: 20 },
+                  letterSpacing: '.3px',
+                  display: 'flex',
+                  alignItems:'center',
+                  gap: .5,
+                  ".MuiSvgIcon-root": { fontSize: 20 }
                 }}
               >
                 {project?.name}
@@ -62,14 +61,7 @@ export const ProjectInfo = ({ id, url, handler, github }) => {
                 )}
               </Typography>
               <Box>
-                <EditButton
-                  handler={handler}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    e.stopPropagation(); // Prevent parent Link navigation
-                    handler();
-                  }}
-                />
+                <EditButton sx={{ pointerEvents: "auto", zIndex: 1000}} handler={handler} />
                 <DeleteProject id={id} />
               </Box>
             </Box>
@@ -79,8 +71,8 @@ export const ProjectInfo = ({ id, url, handler, github }) => {
                 sx={{
                   fontSize: 14.5,
                   lineHeight: 1.5,
-                  color: "rgba(255 255 255 / .7)",
-                  mt: 0.5,
+                  color: 'rgba(255 255 255 / .7)',
+                  mt: .5
                 }}
               >
                 {project?.description}
@@ -102,11 +94,11 @@ export const ProjectInfo = ({ id, url, handler, github }) => {
                 fontSize: 12.5,
                 lineHeight: 1.2,
                 wordBreak: "break-word",
-                color: "rgba(255 255 255 / .55)",
-                display: "flex",
-                gap: "3px",
-                alignItems: "center",
-                fontWeight: 500,
+                color: 'rgba(255 255 255 / .55)',
+                display: 'flex',
+                gap: '3px',
+                alignItems: 'center',
+                fontWeight:500
               }}
             >
               <Box
@@ -125,13 +117,13 @@ export const ProjectInfo = ({ id, url, handler, github }) => {
               sx={{
                 fontSize: 12.5,
                 lineHeight: 1.2,
-                wordBreak: "break-word",
-                color: "rgba(255 255 255 / .55)",
-                display: "flex",
-                gap: "3px",
-                alignItems: "center",
-                fontWeight: 500,
-                ".MuiSvgIcon-root": { width: 14, height: 14 },
+                wordBreak: 'break-word',
+                color: 'rgba(255 255 255 / .55)',
+                display: 'flex',
+                gap: '3px',
+                alignItems: 'center',
+                fontWeight:500,
+                ".MuiSvgIcon-root": { width:14, height:14 }
               }}
             >
               <GitHubIcon />
@@ -142,13 +134,13 @@ export const ProjectInfo = ({ id, url, handler, github }) => {
               sx={{
                 fontSize: 12.5,
                 lineHeight: 1.2,
-                wordBreak: "break-word",
-                color: "rgba(255 255 255 / .55)",
-                display: "flex",
-                gap: "3px",
-                alignItems: "center",
-                fontWeight: 500,
-                ".MuiSvgIcon-root": { width: 14, height: 14 },
+                wordBreak: 'break-word',
+                color: 'rgba(255 255 255 / .55)',
+                display: 'flex',
+                gap: '3px',
+                alignItems: 'center',
+                fontWeight:500,
+                ".MuiSvgIcon-root": { width:14, height:14 }
               }}
             >
               <StarsIcon />
@@ -159,10 +151,10 @@ export const ProjectInfo = ({ id, url, handler, github }) => {
               sx={{
                 fontSize: 12.5,
                 lineHeight: 1.2,
-                wordBreak: "break-word",
-                color: "rgba(255 255 255 / .4)",
-                ml: "auto",
-                fontWeight: 500,
+                wordBreak: 'break-word',
+                color: 'rgba(255 255 255 / .4)',
+                ml: 'auto',
+                fontWeight:500
               }}
             >
               {project?.size}&nbsp;KB

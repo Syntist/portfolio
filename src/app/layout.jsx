@@ -2,17 +2,18 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Header from "@/components/Header";
 import { Oswald, Roboto } from "next/font/google";
+import Providers from "./provider";
 import "./globals.css";
 
 const roboto = Roboto({
   subsets: ["latin"],
   weight: ["400", "500", "900"],
-  variable: '--font-roboto',
+  variable: "--font-roboto",
 });
 const oswald = Oswald({
   subsets: ["latin"],
   weight: ["200", "300", "400", "500", "600", "700"],
-  variable: '--font-oswald',
+  variable: "--font-oswald",
 });
 
 export const metadata = {
@@ -24,8 +25,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${oswald.variable} ${roboto.variable}`}>
-        <Header />
-        {children}
+        <Providers>
+          <Header />
+          {children}
+        </Providers>
         <ToastContainer />
       </body>
     </html>
