@@ -144,7 +144,7 @@ export default function ChatStream({ context, isProjectMode = false }) {
           <button
             onClick={() => fetchChatStream(message)}
             disabled={!message.trim() || loading}
-            className="relative inline-flex items-center gap-2 rounded-xl bg-gradient-to-br from-indigo-600 via-indigo-500 to-fuchsia-600 disabled:from-slate-500 disabled:to-slate-600 disabled:opacity-60 disabled:cursor-not-allowed px-6 py-4 text-sm font-semibold tracking-wide text-white shadow-[0_4px_20px_-4px_rgba(99,102,241,.5)] hover:shadow-[0_6px_24px_-4px_rgba(99,102,241,.65)] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-indigo-400/70 focus-visible:ring-offset-[rgb(var(--color-bg))]"
+            className="mb-2 relative inline-flex items-center gap-2 rounded-xl bg-gradient-to-br from-indigo-600 via-indigo-500 to-fuchsia-600 disabled:from-slate-500 disabled:to-slate-600 disabled:opacity-60 disabled:cursor-not-allowed px-6 py-4 text-sm font-semibold tracking-wide text-white shadow-[0_4px_20px_-4px_rgba(99,102,241,.5)] hover:shadow-[0_6px_24px_-4px_rgba(99,102,241,.65)] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-indigo-400/70 focus-visible:ring-offset-[rgb(var(--color-bg))]"
           >
             <PaperAirplaneIcon className="w-4 h-4 -rotate-45" />
             <span>{loading ? "Sending" : "Send"}</span>
