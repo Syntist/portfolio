@@ -11,7 +11,6 @@ import { getRepoData } from "@/server-action/github";
 import { useAuth } from "@/hooks/useAuth";
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
-import { isMobile } from "react-device-detect";
 
 const MarkdownPreview = dynamic(() => import("@uiw/react-markdown-preview"), {
   ssr: false,
