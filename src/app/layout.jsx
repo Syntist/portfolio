@@ -4,6 +4,7 @@ import { Oswald, Roboto } from "next/font/google";
 import Providers from "./provider";
 import "./globals.css";
 import Header from "@/sharedComponents/Header";
+import { Analytics } from "@vercel/analytics/next";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -30,6 +31,7 @@ export default function RootLayout({ children }) {
           {children}
         </Providers>
         <ToastContainer />
+        <Analytics />
       </body>
     </html>
   );
