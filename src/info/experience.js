@@ -1,9 +1,20 @@
 export const experience = [
   {
+    title: "NeoTech Labs",
+    role: "Associate Researcher ",
+    startDate: "Feb 2024",
+    endDate: "Present",
+    description:
+      "I oversee project development, ensuring timely progress, code quality, and best practices. I build and optimize the React Native app for better performance and user experience, integrate Stripe with Google Pay and Apple Pay, and maintain CI/CD pipelines while enhancing backend functionality.",
+    backgroundColor: "#808080",
+    imageBackgroundColor: "white",
+    logo: "/logo/ai_neotech_logo.jpeg",
+  },
+  {
     title: "Saeeds Lab(FIU)",
     role: "Research Assistant",
     startDate: "Apr 2024",
-    endDate: "Present",
+    endDate: "Feb 2025",
     description:
       "Research Assistant and Back End Developer at FIU's Saeed Lab since Apr 2024, enhancing websites and developing AI-driven tools for omics analysis, with significant contributions to Graph-DOM, MAESTRO, and ProteoRift projects.",
     backgroundColor: "#808080",

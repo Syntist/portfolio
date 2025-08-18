@@ -1,11 +1,11 @@
 export const proficiency = [
 	{
 		title: "Frontend / Design",
-		value: 94,
+		value: 85,
 	},
   {
     title: "Backend",
-    value: 85,
+    value: 90,
   },
 	{
     title: "Programming",

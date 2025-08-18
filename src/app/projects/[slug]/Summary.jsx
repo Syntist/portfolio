@@ -4,6 +4,7 @@ import { Box, Button, CircularProgress } from "@mui/material";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { RefreshOutlined } from "@mui/icons-material";
+import { useAuth } from "@/hooks/useAuth";
 
 // Dynamically import MarkdownPreview to avoid SSR issues
 const MarkdownPreview = dynamic(() => import("@uiw/react-markdown-preview"), {
@@ -12,6 +13,7 @@ const MarkdownPreview = dynamic(() => import("@uiw/react-markdown-preview"), {
 
 export const Summary = ({ summary, setSummary }) => {
   const [loading, setLoading] = useState(true);
+  const { isAdmin } = useAuth();
   const { slug } = useParams();
 
   const summaryRefresh = () => {
@@ -35,25 +37,26 @@ export const Summary = ({ summary, setSummary }) => {
 
   return (
     <Box sx={{ mt: 2, mb: 2, position: "relative" }}>
-
       {loading && !summary ? (
         <CircularProgress />
       ) : (
         <Box sx={{ position: "relative" }}>
-          <Button
-            onClick={summaryRefresh}
-            size="small"
-            sx={{
-              position: "absolute",
-              top: { xs: -90, sm: -60 }, // top for mobile (xs) and larger screens (sm+)
-              right: { xs: 52, sm: 8 },
-              minWidth: "auto",
-              p: 1,
-              borderRadius: "50%",
-            }}
-          >
-            <RefreshOutlined fontSize="small" />
-          </Button>
+          {isAdmin && (
+            <Button
+              onClick={summaryRefresh}
+              size="small"
+              sx={{
+                position: "absolute",
+                top: { xs: -90, sm: -60 }, // top for mobile (xs) and larger screens (sm+)
+                right: { xs: 52, sm: 8 },
+                minWidth: "auto",
+                p: 1,
+                borderRadius: "50%",
+              }}
+            >
+              <RefreshOutlined fontSize="small" />
+            </Button>
+          )}
           <MarkdownPreview source={summary} />
         </Box>
       )}
