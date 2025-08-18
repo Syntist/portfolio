@@ -30,9 +30,12 @@ export const ProjectCard = async ({ project }) => {
           <span className="card-sheen" />
           <ProjectInfo
             id={project?._id}
+            description={project?.description}
+            title={project?.title}
             github={project?.github}
             url={project?.url}
             handler={project.handler}
+            short={350}
           />
         </Card>
       </Link>

@@ -39,10 +39,13 @@ export default function ProjectTabs({ project, repoData }) {
       sx={{ width: "100%", margin: "0 auto 20px", padding: "0 24px", mt: 5 }}
     >
       <ProjectInfo
+        title={project?.title}
+        description={project?.description}
         github={project.github}
         id={project._id}
         url={project.url}
         handler={project.handler}
+        short={false}
       />
 
       {/* Tabs for Description and README */}
@@ -54,23 +57,23 @@ export default function ProjectTabs({ project, repoData }) {
         indicatorColor="primary"
         sx={{ mb: 2 }}
       >
-        <Tab label="Summary" />
-        {project.description && <Tab label="Description" />}
-        <Tab label="GitHub README" />
-        <Tab label="Interactive Mode" />
+        <Tab value={0} label="Summary" />
+        {/* {project.description && <Tab label="Description" />} */}
+        <Tab value={2} label="GitHub README" />
+        <Tab value={3} label="Interactive Mode" />
       </Tabs>
 
       {selectedTab === 0 && (
         <Summary summary={summary} setSummary={setSummary} />
       )}
 
-      {selectedTab === numTab - 2 && project.description && (
+      {/* {selectedTab === 1 && project.description && (
         <Box sx={{ mt: 2, mb: 2 }}>
           <MarkdownPreview source={project.description} />
         </Box>
-      )}
+      )} */}
 
-      {selectedTab === numTab - 1 && (
+      {selectedTab === 2 && (
         <Box sx={{ mt: 2, mb: 2 }}>
           {loading ? (
             <CircularProgress />
@@ -86,7 +89,7 @@ export default function ProjectTabs({ project, repoData }) {
         </Box>
       )}
 
-      {selectedTab === numTab && (
+      {selectedTab === 3 && (
         <InteractiveMode
           project={project}
           context={context}

@@ -6,13 +6,30 @@ import StarsIcon from "@mui/icons-material/Stars";
 import { DeleteProject } from "../DeleteProject";
 import OpenInBrowserIcon from "@mui/icons-material/OpenInBrowser";
 import { EditButton } from "../EditButton";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { getRepoData } from "@/server-action/github";
 import { useAuth } from "@/hooks/useAuth";
+import dynamic from "next/dynamic";
+import { usePathname } from "next/navigation";
+import { isMobile } from "react-device-detect";
 
-export const ProjectInfo = ({ id, url, handler, github }) => {
+const MarkdownPreview = dynamic(() => import("@uiw/react-markdown-preview"), {
+  ssr: false,
+});
+
+export const ProjectInfo = ({
+  id,
+  url,
+  handler,
+  github,
+  title,
+  description,
+  short = true,
+}) => {
   const { isAdmin } = useAuth();
   const [project, setProject] = useState();
+  const pathname = usePathname()
+
 
   useEffect(() => {
     getRepoData(github).then((res) => setProject(res));
@@ -47,18 +64,20 @@ export const ProjectInfo = ({ id, url, handler, github }) => {
                   display: "flex",
                   alignItems: "center",
                   gap: 0.5,
+              paddingLeft: "9px",
+
                   ".MuiSvgIcon-root": { fontSize: 20 },
                 }}
               >
-                {project?.name}
+                {title}
                 {"        "}
-                <Link href={project?.html_url} target="_blank">
-                  <GitHubIcon />
+                <Link className="ms-2" href={project?.html_url} target="_blank">
+                  <GitHubIcon sx={{ paddingBottom: "3px" }} />
                 </Link>
                 {"        "}
                 {url && (
-                  <Link href={url} target="_blank">
-                    <OpenInBrowserIcon />
+                  <Link className="ms-2" href={url} target="_blank">
+                    <OpenInBrowserIcon sx={{ paddingBottom: "3px" }} />
                   </Link>
                 )}
               </Typography>
@@ -72,27 +91,33 @@ export const ProjectInfo = ({ id, url, handler, github }) => {
                 </Box>
               )}
             </Box>
-            {project?.description && (
-              <Typography
-                variant="body1"
-                sx={{
-                  fontSize: 14.5,
-                  lineHeight: 1.5,
-                  color: "rgba(255 255 255 / .7)",
-                  mt: 0.5,
-                }}
-              >
-                {project?.description}
-              </Typography>
-            )}
+            {project?.description ||
+              (description && (
+                <Typography
+                  variant="body1"
+                  sx={{
+                    fontSize: 14.5,
+                    lineHeight: 1.5,
+                    color: "rgba(255 255 255 / .7)",
+                    mt: 0.5,
+                  }}
+                >
+                  <Suspense>
+                    <MarkdownPreview
+                      className={`wmde-markdown background ${short ? "truncate-2" : ""}`}
+                      source={project?.description || description}
+                    />
+                  </Suspense>
+                </Typography>
+              ))}
           </Box>
-          <Box></Box>
           <Box
             sx={{
               display: "flex",
               gap: "10px",
               marginTop: "24px",
               alignItems: "center",
+              paddingLeft: "9px",
             }}
           >
             <Typography
