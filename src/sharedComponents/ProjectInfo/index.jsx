@@ -90,8 +90,8 @@ export const ProjectInfo = ({
                 </Box>
               )}
             </Box>
-            {project?.description ||
-              (description && (
+            {(project?.description ||
+              description) && (
                 <Typography
                   variant="body1"
                   sx={{
@@ -108,7 +108,7 @@ export const ProjectInfo = ({
                     />
                   </Suspense>
                 </Typography>
-              ))}
+              )}
           </Box>
           <Box
             sx={{
