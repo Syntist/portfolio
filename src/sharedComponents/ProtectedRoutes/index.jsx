@@ -1,9 +1,9 @@
 "use client";
 
 import { useAuth } from "@/hooks/useAuth";
-import { CircularProgress } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { CustomProgress } from "../CustomProgress";
 
 export const ProtectedRoutes = ({ children }) => {
   const { isAdmin, status } = useAuth();
@@ -16,7 +16,7 @@ export const ProtectedRoutes = ({ children }) => {
   }, [isAdmin, status, router]);
 
   if (status === "loading") {
-    return <CircularProgress />;
+    return <CustomProgress size="lg" className={"m-auto"} />
   }
 
   return children;

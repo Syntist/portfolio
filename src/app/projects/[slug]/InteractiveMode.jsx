@@ -1,6 +1,7 @@
 import ChatStream from "@/app/assistant/chat";
 import { contextSession } from "@/server-action/chatbot";
-import { CircularProgress, Box } from "@mui/material";
+import { CustomProgress } from "@/sharedComponents/CustomProgress";
+import { Box } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
 export default function InteractiveMode({ project, context, setContext }) {
@@ -25,7 +26,7 @@ export default function InteractiveMode({ project, context, setContext }) {
           height: '200px'
         }}
       >
-        <CircularProgress />
+        <CustomProgress size="lg" className={"m-auto"} />
       </Box>
     );
   }

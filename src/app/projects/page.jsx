@@ -1,9 +1,7 @@
 import { ProjectCard } from "@/components/projects/ProjectCard";
 import { getProjects } from "@/server-action/project";
-import { Box, Typography, Button, Container } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import { Suspense } from "react";
-import AddIcon from "@mui/icons-material/Add";
-import Link from "next/link";
 import { ProjectsPageHeader } from "./ProjectsPageHeader";
 
 export default async function Projects() {

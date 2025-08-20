@@ -1,12 +1,13 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Tabs, Tab, Box, CircularProgress } from "@mui/material";
+import { Tabs, Tab, Box } from "@mui/material";
 import InteractiveMode from "./InteractiveMode";
 import { getRepoReadme } from "@/server-action/github";
 import { Summary } from "./Summary";
 import { ProjectInfo } from "@/sharedComponents/ProjectInfo";
 import { MarkdownRenderer } from "@/sharedComponents/MarkdownRenderer";
+import { CustomProgress } from "@/sharedComponents/CustomProgress";
 
 export default function ProjectTabs({ project, repoData }) {
   const [readmeData, setReadmeData] = useState();
@@ -70,7 +71,7 @@ export default function ProjectTabs({ project, repoData }) {
       {selectedTab === 2 && (
         <Box sx={{ mt: 2, mb: 2 }}>
           {loading ? (
-            <CircularProgress />
+            <CustomProgress size="lg" className={"m-auto"} />
           ) : (
             <MarkdownRenderer
               content={

@@ -27,12 +27,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${oswald.variable} ${roboto.variable}`}>
-        <Providers>
-          <Header />
-          {children}
-        </Providers>
-        <ToastContainer />
-        <Analytics />
+          <Providers>
+            <Header />
+            {children}
+          </Providers>
+          <ToastContainer />
+          <Analytics />
       </body>
     </html>
   );

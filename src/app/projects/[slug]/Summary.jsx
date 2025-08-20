@@ -1,10 +1,11 @@
 import { getProjectSummary, refreshSummary } from "@/server-action/chatbot";
-import { Box, Button, CircularProgress } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { RefreshOutlined } from "@mui/icons-material";
 import { useAuth } from "@/hooks/useAuth";
 import { MarkdownRenderer } from "@/sharedComponents/MarkdownRenderer";
+import { CustomProgress } from "@/sharedComponents/CustomProgress";
 
 
 export const Summary = ({ summary, setSummary }) => {
@@ -33,8 +34,8 @@ export const Summary = ({ summary, setSummary }) => {
 
   return (
     <Box sx={{ mt: 2, mb: 2, position: "relative" }}>
-      {loading && !summary ? (
-        <CircularProgress />
+      {loading ? (
+        <CustomProgress size="lg" className={"m-auto"} />
       ) : (
         <Box sx={{ position: "relative" }}>
           {isAdmin && (
