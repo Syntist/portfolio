@@ -50,7 +50,7 @@ export default async function BlogsPage() {
 
   return (
     <div>
-      <div className="container-xl mt-10 mb-10">
+      <div className="container-xl mt-5 mb-5">
         <div className="mb-6">
           <h1 className="text-3xl md:text-4xl font-bold">Blogs</h1>
           <p className="mt-2 text-white/70">Insights, notes, and write-ups.</p>
