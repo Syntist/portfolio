@@ -1,5 +1,4 @@
 
-import { getRepoData, getRepoReadme } from "@/server-action/github";
 import { getProject } from "@/server-action/project";
 import ProjectTabs from "./ProjectTabs";
 

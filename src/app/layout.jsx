@@ -1,10 +1,11 @@
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { Oswald, Roboto } from "next/font/google";
-import Providers from "./provider";
-import "./globals.css";
-import Header from "@/sharedComponents/Header";
 import { Analytics } from "@vercel/analytics/next";
+import Providers from "./provider";
+import Header from "@/sharedComponents/Header";
+
+import "./globals.css";
+import "react-toastify/dist/ReactToastify.css";
 
 const roboto = Roboto({
   subsets: ["latin"],

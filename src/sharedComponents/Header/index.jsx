@@ -30,6 +30,7 @@ const pages = [
   { label: "Home", path: "/" },
   { label: "Projects", path: "/projects" },
   { label: "Assistant", path: "/assistant" },
+  { label: "Blogs", path: "/blogs" }
 ];
 
 function Header() {
@@ -175,7 +176,7 @@ function Header() {
               }}
             >
               {pages.map(({ label, path }) => {
-                const active = pathname === path;
+                const active = label === "Home" ? pathname === "/" : pathname.startsWith(path);
                 return (
                   <Box key={path} sx={{ position: "relative" }}>
                     <Button

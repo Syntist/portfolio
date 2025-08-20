@@ -1,15 +1,11 @@
-import dynamic from "next/dynamic";
 import { getProjectSummary, refreshSummary } from "@/server-action/chatbot";
 import { Box, Button, CircularProgress } from "@mui/material";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { RefreshOutlined } from "@mui/icons-material";
 import { useAuth } from "@/hooks/useAuth";
+import { MarkdownRenderer } from "@/sharedComponents/MarkdownRenderer";
 
-// Dynamically import MarkdownPreview to avoid SSR issues
-const MarkdownPreview = dynamic(() => import("@uiw/react-markdown-preview"), {
-  ssr: false,
-});
 
 export const Summary = ({ summary, setSummary }) => {
   const [loading, setLoading] = useState(true);
@@ -57,7 +53,7 @@ export const Summary = ({ summary, setSummary }) => {
               <RefreshOutlined fontSize="small" />
             </Button>
           )}
-          <MarkdownPreview source={summary} />
+          <MarkdownRenderer content={summary} />
         </Box>
       )}
     </Box>
