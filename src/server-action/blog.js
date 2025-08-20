@@ -2,6 +2,7 @@
 
 import db from "@/db/conn";
 import axios from "axios";
+import { ObjectId } from "mongodb";
 
 const Blogs = db.collection("blogs");
 
@@ -35,6 +36,25 @@ export const generateBlog = async () => {
     );
     return response.data;
   } catch (error) {
+    console.error(error);
+    return Promise.reject(error);
+  }
+};
+
+export const deleteBlog = async (id) => {
+  try {
+    console.log("slug ", id)
+
+    const del = await Blogs.deleteOne({ _id: new ObjectId(id) });
+
+    if (!del.acknowledged) {
+      throw new Error("Failed to delete blog");
+    }
+
+    return { success: true };
+  } catch (error) {
+
+    console.log("error ", error)
     console.error(error);
     return Promise.reject(error);
   }

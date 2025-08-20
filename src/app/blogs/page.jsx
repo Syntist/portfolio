@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getBlogs } from "@/server-action/blog";
 import { LocalTime } from "./LocalTime";
 import { GenerateBlog } from "./GenerateBlog";
+import DeleteBlog from "./DeleteBlog";
 
 export default async function BlogsPage() {
   const blogs = await getBlogs();
@@ -92,20 +93,27 @@ export default async function BlogsPage() {
                     {excerpt && (
                       <p className="mt-1 text-sm text-white/70">{excerpt}</p>
                     )}
-                    <div className="mt-4 inline-flex items-center text-sm font-medium text-teal-300">
-                      Read more
-                      <svg
-                        className="ml-1 h-4 w-4"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        aria-hidden
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M10.293 3.293a1 1 0 011.414 0l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414-1.414L13.586 10 10.293 6.707a1 1 0 010-1.414z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
+                    <div className="mt-4 flex items-center text-sm font-medium text-teal-300">
+                      <span className="inline-flex items-center">
+                        Read more
+                        <svg
+                          className="ml-1 h-4 w-4"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          aria-hidden
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M10.293 3.293a1 1 0 011.414 0l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414-1.414L13.586 10 10.293 6.707a1 1 0 010-1.414z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </span>
+
+                      {/* push to the right */}
+                      <div className="ml-auto">
+                        <DeleteBlog id={blog?._id} title={title} />
+                      </div>
                     </div>
                   </div>
                   <span className="card-sheen" />
