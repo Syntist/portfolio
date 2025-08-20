@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getBlogs } from "@/server-action/blog";
+import { LocalTime } from "./LocalTime";
 
 export default async function BlogsPage() {
   const blogs = await getBlogs();
@@ -36,7 +37,7 @@ export default async function BlogsPage() {
     try {
       const d = new Date(dateLike);
       if (isNaN(d)) return null;
-      return d.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
+      return d.toLocaleDateString("en-US", { hour: "numeric", minute: "numeric", year: "numeric", month: "short", day: "numeric" });
     } catch {
       return null;
     }
@@ -61,7 +62,7 @@ export default async function BlogsPage() {
             {blogs.map((blog) => {
               const title = getTitle(blog) || "Untitled";
               const href = `/blogs/${blog?.title}`;
-              const date = formatDate(blog?.createdAt);
+              const date = blog?.createdAt
               const excerpt = getExcerpt(blog);
               const img = blog?.image_url || null;
 
@@ -80,7 +81,7 @@ export default async function BlogsPage() {
                   </div>
                   <div className="p-4">
                     <div className="flex items-center gap-2 text-xs text-white/60">
-                      {date && <span>{date}</span>}
+                      {date && <LocalTime date={date} />}
                       <span className="before:content-['•'] before:mx-2 before:text-white/30" />
                       <span>{readingTime(blog)}</span>
                     </div>
