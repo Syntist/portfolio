@@ -173,6 +173,32 @@ export const IntroSection = () => {
             </Button>
             <Button
               component={Link}
+              href="/contact"
+              size="large"
+              variant="outlined"
+              sx={{
+                position: "relative",
+                fontWeight: 500,
+                px: 3.2,
+                py: 1.35,
+                fontSize: 15,
+                borderRadius: "var(--radius-lg)",
+                border: "1px solid rgba(34 197 94 / .35)",
+                color: "#22c55e",
+                textTransform: "none",
+                background: "rgba(34 197 94 / .08)",
+                backdropFilter: "blur(10px)",
+                "&:hover": {
+                  background: "rgba(34 197 94 / .15)",
+                  borderColor: "rgba(34 197 94 / .5)",
+                  boxShadow: "0 4px 20px -2px rgba(34 197 94 / .3)",
+                },
+              }}
+            >
+              Contact Me
+            </Button>
+            <Button
+              component={Link}
               href="/assistant"
               size="large"
               variant="outlined"
