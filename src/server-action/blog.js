@@ -43,8 +43,6 @@ export const generateBlog = async () => {
 
 export const deleteBlog = async (id) => {
   try {
-    console.log("slug ", id)
-
     const del = await Blogs.deleteOne({ _id: new ObjectId(id) });
 
     if (!del.acknowledged) {
