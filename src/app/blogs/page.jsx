@@ -7,8 +7,6 @@ import DeleteBlog from "./DeleteBlog";
 export default async function BlogsPage() {
   const blogs = await getBlogs();
 
-  console.log(blogs)
-
   return (
     <div>
       <div className="container-xl mt-5 mb-5">
