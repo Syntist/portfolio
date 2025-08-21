@@ -21,24 +21,27 @@ const oswald = Oswald({
 export const metadata = {
   title: "Syed Talha Khalid",
   description: "Crafting Scalable & Delightful Digital Experiences",
-  icons: {
-    icon: "/favicon.ico", // place this in /public
-    shortcut: "/favicon.ico",
-    apple: "/apple-touch-icon.png", // optional, for iOS
-  },
   openGraph: {
     title: "Syed Talha Khalid",
     description: "Crafting Scalable & Delightful Digital Experiences",
-    url: "https://www.syedtalhakhalid.com", // <-- your deployed domain
+    url: "https://www.syedtalhakhalid.com",
     siteName: "Syed Talha Khalid",
-    locale: "en_US",
+    images: [
+      {
+        url: "/preview.png",
+        width: 1200,
+        height: 630,
+        alt: "Portfolio Preview",
+      },
+    ],
     type: "website",
+    locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
     title: "Syed Talha Khalid",
     description: "Crafting Scalable & Delightful Digital Experiences",
-    images: ["https://www.syedtalhakhalid.com/preview.png"],
+    images: ["/preview.png"],
   },
 };
 
