@@ -9,6 +9,8 @@ import { cookies } from "next/headers";
 const Blogs = db.collection("blogs");
 
 export const getBlogs = async () => {
+  const _cookies = cookies()
+
   const cursor = Blogs.find({}).sort({ createdAt: -1 });
   const blogs = await cursor.toArray();
 
@@ -18,9 +20,7 @@ export const getBlogs = async () => {
   }));
 };
 
-export const getBlog = async (slug) => {
-  const _cookies = cookies()
-  
+export const getBlog = async (slug) => {  
   const blog = await Blogs.findOne({ title: slug });
 
   if (!blog) {
