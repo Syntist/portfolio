@@ -1,15 +1,22 @@
 "use server";
 
-import db from "@/db/conn";
+import { connectDB } from "@/db/conn";
 import { ObjectId } from "mongodb";
 import { revalidatePath } from "next/cache";
 
-let Projects = db.collection("projects");
-Projects.createIndex({ github: 1, url: 1, title: 1 }, { unique: true });
+async function getProjectsCollection() {
+  const db = await connectDB();
+  const Projects = db.collection("projects");
+  Projects.createIndex({ github: 1, url: 1, title: 1 }, { unique: true });
+
+  return Projects;
+}
 
 export const createProject = async (formData) => {
   try {
     if (!formData) throw { errmsg: "No formdata given" };
+
+    const Projects = await getProjectsCollection();
 
     const project = await Projects.insertOne(formData);
 
@@ -29,6 +36,7 @@ export const createProject = async (formData) => {
 export const updateProject = async (formData) => {
   try {
     if (!formData) throw { errmsg: "No formdata given" };
+    const Projects = await getProjectsCollection();
 
     const { _id, ...updateData } = formData;
 
@@ -51,7 +59,9 @@ export const updateProject = async (formData) => {
 };
 
 export const getProjects = async () => {
+  const Projects = await getProjectsCollection();
   const projects = await Projects.find({}).toArray();
+  
 
   return projects.map((project) => ({
     ...project,
@@ -60,6 +70,7 @@ export const getProjects = async () => {
 };
 
 export const getProject = async (handler) => {
+  const Projects = await getProjectsCollection();
   const project = await Projects.findOne({ handler: handler });
 
   return { ...project, _id: project?._id.toJSON() };
@@ -67,6 +78,7 @@ export const getProject = async (handler) => {
 
 export const deleteProject = async (id) => {
   try {
+    const Projects = await getProjectsCollection(); 
     const project = await Projects.deleteOne({ _id: new ObjectId(id) });
 
     if (project) {

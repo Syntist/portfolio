@@ -7,41 +7,7 @@ import DeleteBlog from "./DeleteBlog";
 export default async function BlogsPage() {
   const blogs = await getBlogs();
 
-  const getTitle = (blog) => {
-    return blog.content.split("\n")[0].split("# ")[1];
-  };
-
-  const stripMarkdown = (md = "") =>
-    md
-      .replace(/```[\s\S]*?```/g, " ") // code blocks
-      .replace(/!\[[^\]]*\]\([^)]*\)/g, " ") // images
-      .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1") // links
-      .replace(/^#{1,6}\s*/gm, "") // headings
-      .replace(/`([^`]+)`/g, "$1") // inline code
-      .replace(/\*\*|__|\*|_/g, "") // emphasis
-      .replace(/^>\s*/gm, "") // quotes
-      .replace(/^(-|\*|\+|\d+\.)\s+/gm, "") // lists
-      .replace(/\r/g, "")
-      .trim();
-
-  const getExcerpt = (blog, maxLen = 180) => {
-    const lines = blog?.content?.split("\n") ?? [];
-    const body =
-      lines.length > 1 ? lines.slice(1).join("\n") : blog?.content ?? "";
-    const plain = stripMarkdown(body).replace(/\s+/g, " ").trim();
-    if (plain.length <= maxLen) return plain;
-    const cut = plain.slice(0, maxLen);
-    const lastSpace = cut.lastIndexOf(" ");
-    return `${lastSpace > 0 ? cut.slice(0, lastSpace) : cut}…`;
-  };
-
-  const readingTime = (blog) => {
-    const words = stripMarkdown(blog?.content ?? "")
-      .split(/\s+/)
-      .filter(Boolean).length;
-    const mins = Math.max(1, Math.round(words / 200));
-    return `${mins} min read`;
-  };
+  console.log(blogs)
 
   return (
     <div>
@@ -57,11 +23,12 @@ export default async function BlogsPage() {
         {Array.isArray(blogs) && blogs.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {blogs.map((blog) => {
-              const title = getTitle(blog) || "Untitled";
-              const href = `/blogs/${blog?.title}`;
+              const title = blog.title || "";
+              const href = `/blogs/${blog?.slug}` || "";
               const date = blog?.createdAt;
-              const excerpt = getExcerpt(blog);
+              const excerpt = blog?.excerpt || null;
               const img = blog?.image_url || null;
+              const read_time = blog?.read_time || null;
 
               return (
                 <Link
@@ -85,7 +52,7 @@ export default async function BlogsPage() {
                     <div className="flex items-center gap-2 text-xs text-white/60">
                       {date && <LocalTime date={date} />}
                       <span className="before:content-['•'] before:mx-2 before:text-white/30" />
-                      <span>{readingTime(blog)}</span>
+                      <span>{read_time} min read</span>
                     </div>
                     <h2 className="mt-2 text-lg font-semibold leading-snug">
                       {title}

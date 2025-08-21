@@ -1,6 +1,5 @@
 "use server";
 
-import db from "@/db/conn";
 import { personalContext } from "@/utils/chatContext";
 import { retrieveGitHubRepoInfo } from "@/utils/utils";
 import { GoogleGenerativeAI } from "@google/generative-ai";
@@ -8,10 +7,15 @@ import { ObjectId } from "mongodb";
 import OpenAI from "openai";
 import { getRepoReadme } from "./github";
 import { getProject } from "./project";
+import { connectDB } from "@/db/conn";
 
-let Chatbot = db.collection("chatbot");
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_CHAT_API);
 const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+
+const getChatbotCollection = async () => {
+  const db = await connectDB();
+  return db.collection("chatbot");
+};
 
 const openai = new OpenAI({
   baseURL: "https://openrouter.ai/api/v1",
@@ -128,6 +132,7 @@ export async function testChatBot(contents, history, id) {
 
 export async function contextSession(id, github) {
   try {
+    const Chatbot = await getChatbotCollection();
     const oldContext = await getContext(id);
 
     if (oldContext) {
@@ -161,6 +166,7 @@ export async function contextSession(id, github) {
 
 export async function getContext(id) {
   try {
+    const Chatbot = await getChatbotCollection();
     const data = await Chatbot.findOne({ _id: new ObjectId(id) });
 
     return data.context;
@@ -171,6 +177,7 @@ export async function getContext(id) {
 
 export async function getSummary(id) {
   try {
+    const Chatbot = await getChatbotCollection();
     const data = await Chatbot.findOne({ _id: new ObjectId(id) });
 
     return data?.summary;
@@ -181,6 +188,7 @@ export async function getSummary(id) {
 
 export const getProjectSummary = async (handler) => {
   const project = await getProject(handler);
+  const Chatbot = await getChatbotCollection();
   const data = await Chatbot.findOne({ _id: new ObjectId(project._id) });
 
   const oldSummary = data?.summary;
@@ -214,6 +222,7 @@ export const getProjectSummary = async (handler) => {
 
 export const refreshSummary = async (handler) => {
   const project = await getProject(handler);
+  const Chatbot = await getChatbotCollection();
 
   if (!project) return null;
 

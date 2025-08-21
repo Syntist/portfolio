@@ -1,27 +1,35 @@
 "use server";
 
-import db from "@/db/conn";
+import { connectDB } from "@/db/conn";
 import axios from "axios";
 import { ObjectId } from "mongodb";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
-const Blogs = db.collection("blogs");
+async function getBlogsCollection() {
+  const db = await connectDB();
+  const Blogs = db.collection("blogs");
+
+  Blogs.createIndex({ slug: 1 }, { unique: true });
+
+  return Blogs;
+}
 
 export const getBlogs = async () => {
-  const _cookies = cookies()
+  const _cookies = cookies();
+  const Blogs = await getBlogsCollection();
 
-  const cursor = Blogs.find({}).sort({ createdAt: -1 });
+  const cursor = Blogs.find({}, { projection: { content: 0 } }).sort({
+    createdAt: -1,
+  });
   const blogs = await cursor.toArray();
 
-  return blogs.map((b) => ({
-    ...b,
-    _id: b._id?.toJSON?.() ?? String(b._id),
-  }));
+  return blogs;
 };
 
-export const getBlog = async (slug) => {  
-  const blog = await Blogs.findOne({ title: slug });
+export const getBlog = async (slug) => {
+  const Blogs = await getBlogsCollection();
+  const blog = await Blogs.findOne({ slug: slug });
 
   if (!blog) {
     throw new Error("Blog not found");
@@ -36,7 +44,7 @@ export const getBlog = async (slug) => {
 export const generateBlog = async () => {
   try {
     const response = await axios.get(
-      "https://articles-generator-peach.vercel.app/api/generate-articles/cron"
+      "https://articles-generator-peach.vercel.app/api/generate-articles/portfolio"
     );
 
     revalidatePath("/blogs");
@@ -49,18 +57,17 @@ export const generateBlog = async () => {
 
 export const deleteBlog = async (id) => {
   try {
+    const Blogs = await getBlogsCollection();
     const del = await Blogs.deleteOne({ _id: new ObjectId(id) });
 
     if (!del.acknowledged) {
       throw new Error("Failed to delete blog");
     }
 
-
     revalidatePath("/blogs");
     return { success: true };
   } catch (error) {
-
-    console.log("error ", error)
+    console.log("error ", error);
     console.error(error);
     return Promise.reject(error);
   }
