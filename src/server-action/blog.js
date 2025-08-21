@@ -3,6 +3,7 @@
 import db from "@/db/conn";
 import axios from "axios";
 import { ObjectId } from "mongodb";
+import { revalidatePath } from "next/cache";
 
 const Blogs = db.collection("blogs");
 
@@ -34,6 +35,8 @@ export const generateBlog = async () => {
     const response = await axios.get(
       "https://articles-generator-peach.vercel.app/api/generate-articles/cron"
     );
+
+    revalidatePath("/blogs");
     return response.data;
   } catch (error) {
     console.error(error);
@@ -49,6 +52,8 @@ export const deleteBlog = async (id) => {
       throw new Error("Failed to delete blog");
     }
 
+
+    revalidatePath("/blogs");
     return { success: true };
   } catch (error) {
 
