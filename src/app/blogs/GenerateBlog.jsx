@@ -17,6 +17,7 @@ export const GenerateBlog = () => {
     try {
       const content = await generateBlog();
       router.refresh();
+      toast.success("Blog generated successfully");
     } catch (error) {
       console.error(error);
     } finally {

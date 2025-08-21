@@ -4,6 +4,7 @@ import db from "@/db/conn";
 import axios from "axios";
 import { ObjectId } from "mongodb";
 import { revalidatePath } from "next/cache";
+import { cookies } from "next/headers";
 
 const Blogs = db.collection("blogs");
 
@@ -18,6 +19,8 @@ export const getBlogs = async () => {
 };
 
 export const getBlog = async (slug) => {
+  const _cookies = cookies()
+  
   const blog = await Blogs.findOne({ title: slug });
 
   if (!blog) {
