@@ -30,7 +30,7 @@ const pages = [
   { label: "Home", path: "/" },
   { label: "Projects", path: "/projects" },
   { label: "Assistant", path: "/assistant" },
-  { label: "Blogs", path: "/blogs" },
+  // { label: "Blogs", path: "/blogs" }, // Temporarily disabled
   { label: "Contact", path: "/contact" }
 ];
 

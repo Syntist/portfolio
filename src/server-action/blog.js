@@ -1,7 +1,7 @@
 "use server";
 
 import { connectDB } from "@/db/conn";
-import axios from "axios";
+// import axios from "axios"; // Disabled temporarily
 import { ObjectId } from "mongodb";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
@@ -43,12 +43,14 @@ export const getBlog = async (slug) => {
 
 export const generateBlog = async () => {
   try {
-    const response = await axios.get(
-      "https://articles-generator-peach.vercel.app/api/generate-articles/portfolio"
-    );
-
-    revalidatePath("/blogs");
-    return response.data;
+    // DISABLED: External blog generator may be compromised
+    throw new Error("Blog generation is temporarily disabled for security reasons");
+    
+    // const response = await axios.get(
+    //   "https://articles-generator-peach.vercel.app/api/generate-articles/portfolio"
+    // );
+    // revalidatePath("/blogs");
+    // return response.data;
   } catch (error) {
     console.error(error);
     return Promise.reject(error);
